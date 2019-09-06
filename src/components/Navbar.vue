@@ -97,29 +97,5 @@ export default {
       this.$emit('sortBy', value);
     },
   },
-  watch: {
-    sortBy(newSortBy) {
-      localStorage.sortBy = newSortBy;
-    },
-    filterByColor(newFilterByColor) {
-      localStorage.filterByColor = newFilterByColor;
-    },
-    filterByTaste(newFilterByTaste) {
-      localStorage.filterByTaste = newFilterByTaste;
-    },
-    filterByAlco(newFilterByAlco) {
-      localStorage.filterByAlco = newFilterByAlco;
-    },
-  },
-  mounted() {
-    if (localStorage.sortBy) {
-      this.sortBy = localStorage.sortBy;
-    }
-    if (localStorage.filterByColor || localStorage.filterByTaste || localStorage.filterByAlco) {
-      this.filterByTaste = localStorage.filterByTaste;
-      this.filterByAlco = localStorage.filterByAlco;
-      this.filterByColor = localStorage.filterByColor;
-    }
-  },
 };
 </script>
