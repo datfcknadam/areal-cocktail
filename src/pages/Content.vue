@@ -1,42 +1,59 @@
 <template>
-    <div>
-        <Navbar/>
-        <div id="content">
-            <b-card :class="{not_found: notFound}"> Ничего не найдено :(</b-card>
-            <div class="cocktail-list">
-                <div v-for="a in search_text(counter, sortedList, cocktailFilter)"
-                  :key="a.id"
-                  class="cocktail">
-                    <div class="name">
-                        <p>{{a.name}} </p>
-                    </div>
-                    <div class="volume">
-                        {{a.vol}}
-                    </div>
-                    <img :src="a.src">
-                    <div class=alco>
-                        <b>Крепость:</b> {{a.alco}}
-                    </div>
-                    <div class="price">
-                        {{a.price}}
-                    </div>
-                    <div class="ingredient">
-                        <p><b>Состав:</b> {{a.ingredient}}</p>
-                    </div>
-                </div>
-            </div>
+  <div>
+    <Navbar @search="valueSearch"
+      @taste="valueFilterTaste"
+      @alco="valueFilterAlco"
+      @color="valueFilterColor"
+      @sortBy="valueSortBy"
+      @removeFilter="cleanFilter"/>
+    <div id="content">
+      <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
+      <div @search="valueSearch" class="cocktail-list">
+        <div v-for="a in search_text(counter, sortedList, cocktailFilter())"
+          :key="a.id"
+          class="cocktail">
+          <div class="name">
+            <p>{{a.name}} </p>
+          </div>
+          <div class="volume">
+            {{a.vol}}
+          </div>
+          <img :src="a.src">
+          <div class=alco>
+            <b>Крепость:</b> {{a.alco}}
+          </div>
+          <div class="price">
+            {{a.price}}
+          </div>
+          <div class="ingredient">
+            <p><b>Состав:</b> {{a.ingredient}}</p>
+          </div>
         </div>
-        <div class="btn-center">
-          <a v-if="this.cocktail.length > counter"
-            :class="{disabled: isDisabled}"
-            class="btn-see-more"
-            @click="counter += 6">Показать еще</a>
-        </div>
+      </div>
     </div>
+    <div class="btn-center">
+      <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}" class="btn-see-more"
+        @click="counter += 6">Показать еще</a>
+    </div>
+  </div>
 </template>
+
 <script>
 import jsonCocktail from '../static/assets/json/jsonCocktail.json';
 import Navbar from '../components/Navbar.vue';
+
+const sortByAlco = function (d1, d2) {
+  return (d1.alco > d2.alco) ? 1 : -1;
+};
+const sortByName = function (d1, d2) {
+  return (d1.name > d2.name) ? 1 : -1;
+};
+const sortByPrice = function (d1, d2) {
+  return (d1.price > d2.price) ? 1 : -1;
+};
+const sortById = function (d1, d2) {
+  return (d1.id > d2.id) ? 1 : -1;
+};
 
 export default {
   components: {
@@ -45,42 +62,77 @@ export default {
   data() {
     return {
       cocktail: jsonCocktail.data,
-      notFound: true,
+      foundCocktail: true,
       isDisabled: false,
       counter: 6,
       sortBy: '',
+      search: '',
+      filterByTaste: null,
+      filterByColor: null,
+      filterByAlco: null,
+      more: true,
     };
   },
   methods: {
-    search_text(end, arrCoctail, filterCocktail) {
-      let { search } = this;
+    cleanFilter() {
+      this.filterByAlco = '';
+      this.filterByColor = '';
+      this.filterByTaste = '';
+      this.placeholder = 'Текила...';
+    },
+    valueSearch(value) {
+      this.search = value;
+    },
+    valueFilterTaste(value) {
+      this.filterByTaste = value;
+    },
+    valueFilterAlco(value) {
+      this.filterByAlco = value;
+    },
+    valueFilterColor(value) {
+      this.filterByColor = value;
+    },
+    valueSortBy(value) {
+      this.sortBy = value;
+    },
+    search_text(end, arrCocktail, filterCocktail) {
+      let {
+        search,
+      } = this;
+      let cocktail = arrCocktail;
       if (filterCocktail) {
-        arrCoctail = filterCocktail;
+        cocktail = filterCocktail;
       }
-      if (!arrCoctail) return arrCoctail;
+      if (!cocktail) {
+        this.foundCocktail = false;
+        return cocktail;
+      }
       if (!search) {
         this.isDisabled = false;
-        this.notFound = true;
-        return arrCoctail.slice(0, end);
+        this.foundCocktail = true;
+        cocktail = cocktail.slice(0, end);
+        return cocktail;
       }
       search = search.trim().toLowerCase();
-      arrCoctail = arrCoctail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
-      if (arrCoctail == '') {
+      cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
+      if (cocktail == '') {
         this.isDisabled = true;
-        this.notFound = false;
-      } else if (arrCoctail.length < 6) {
+        this.foundCocktail = false;
+      } else if (cocktail.length < 6) {
         this.isDisabled = true;
-        this.notFound = true;
-        return arrCoctail;
+        this.foundCocktail = true;
+        return cocktail;
       } else {
         this.isDisabled = false;
-        this.notFound = true;
-        return arrCoctail.slice(0, end);
+        this.foundCocktail = true;
+        return cocktail.slice(0, end);
       }
-      return arrCoctail;
+      return cocktail;
     },
     cocktailFilter() {
-      if (this.filterByColor && this.filterByAlco && this.filterByTaste) {
+      if (this.filterByColor
+        && this.filterByAlco
+        && this.filterByTaste) {
         return this.cocktail.filter((value) => {
           const alcoStr = value.alcoStr.indexOf(this.filterByAlco) !== -1;
           const color = value.color.indexOf(this.filterByColor) !== -1;
@@ -116,12 +168,16 @@ export default {
       }
 
       if (this.filterByTaste) {
-        return this.cocktail.filter(value => value.taste.indexOf(this.filterByTaste) !== -1);
+        return this.cocktail
+          .filter(value => value.taste.indexOf(this.filterByTaste) !== -1);
       }
       if (this.filterByColor) {
-        return this.cocktail.filter(value => value.color.indexOf(this.filterByColor) !== -1);
-      } if (this.filterByAlco) {
-        return this.cocktail.filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
+        return this.cocktail
+          .filter(value => value.color.indexOf(this.filterByColor) !== -1);
+      }
+      if (this.filterByAlco) {
+        return this.cocktail
+          .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
       }
       return this.cocktail;
     },
@@ -129,41 +185,47 @@ export default {
   computed: {
     sortedList() {
       switch (this.sortBy) {
-        case 'alco': return this.cocktail.sort(sortByAlco);
-        case 'name': return this.cocktail.sort(sortByName);
-        case 'price': return this.cocktail.sort(sortByPrice);
-        default: return this.cocktail.sort(sortById);
+        case 'alco':
+          return this.cocktail.sort(sortByAlco);
+        case 'name':
+          return this.cocktail.sort(sortByName);
+        case 'price':
+          return this.cocktail.sort(sortByPrice);
+        default:
+          return this.cocktail.sort(sortById);
       }
     },
   },
 };
-let sortByAlco = function (d1, d2) { return (d1.alco > d2.alco) ? 1 : -1; };
-let sortByName = function (d1, d2) { return (d1.name > d2.name) ? 1 : -1; };
-let sortByPrice = function (d1, d2) { return (d1.price > d2.price) ? 1 : -1; };
-let sortById = function (d1, d2) { return (d1.id > d2.id) ? 1 : -1; };
 </script>
+
 <style>
-img{
-    height: 20vh;
-    padding-bottom: 10px;
-    padding-top: 10px;
+img {
+  height: 20vh;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
-#content{
-    padding-left: 15vw;
-    padding-right: 15vw;
-    font-size: calc(  0.5vw + 1vh);
+
+#content {
+  padding-left: 15vw;
+  padding-right: 15vw;
+  font-size: calc(0.5vw + 1vh);
 }
-.name{
-    font-size: calc(1vw + 1vh);
-    font-weight: 600;
+
+.name {
+  font-size: calc(1vw + 1vh);
+  font-weight: 600;
 }
-.price::after{
-    content:"руб."
+
+.price::after {
+  content: "руб."
 }
-.volume::after{
-    content:"ml";
+
+.volume::after {
+  content: "ml";
 }
-.alco::after{
-    content:"%";
+
+.alco::after {
+  content: "%";
 }
 </style>
