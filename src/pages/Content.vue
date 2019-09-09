@@ -9,7 +9,7 @@
     <div id="content">
       <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
       <div @search="valueSearch" class="cocktail-list">
-        <div v-for="a in search_text(counter, sortedList, cocktailFilter())"
+        <div v-for="a in search_text(cocktailFilter())"
           :key="a.id"
           class="cocktail">
           <div class="name">
@@ -39,19 +39,19 @@
 </template>
 
 <script>
-import jsonCocktail from '../static/assets/json/jsonCocktail.json';
-import Navbar from '../components/Navbar.vue';
+import jsonCocktail from '../components/static/assets/json/jsonCocktail.json';
+import Navbar from '../components/Navbar/Navbar.vue';
 
-const sortByAlco = function (d1, d2) {
+const sortByAlco = function sortByAlco(d1, d2) {
   return (d1.alco > d2.alco) ? 1 : -1;
 };
-const sortByName = function (d1, d2) {
+const sortByName = function sortByName(d1, d2) {
   return (d1.name > d2.name) ? 1 : -1;
 };
-const sortByPrice = function (d1, d2) {
+const sortByPrice = function sortByPrice(d1, d2) {
   return (d1.price > d2.price) ? 1 : -1;
 };
-const sortById = function (d1, d2) {
+const sortById = function sortById(d1, d2) {
   return (d1.id > d2.id) ? 1 : -1;
 };
 
@@ -95,11 +95,11 @@ export default {
     valueSortBy(value) {
       this.sortBy = value;
     },
-    search_text(end, arrCocktail, filterCocktail) {
+    search_text(filterCocktail) {
       let {
         search,
       } = this;
-      let cocktail = arrCocktail;
+      let cocktail = this.sortedList;
       if (filterCocktail) {
         cocktail = filterCocktail;
       }
@@ -110,22 +110,22 @@ export default {
       if (!search) {
         this.isDisabled = false;
         this.foundCocktail = true;
-        cocktail = cocktail.slice(0, end);
+        cocktail = cocktail.slice(0, this.counter);
         return cocktail;
       }
       search = search.trim().toLowerCase();
       cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
-      if (cocktail == '') {
+      if (cocktail.length === 0) {
         this.isDisabled = true;
         this.foundCocktail = false;
-      } else if (cocktail.length < 6) {
+      } else if (cocktail.length <= 6) {
         this.isDisabled = true;
         this.foundCocktail = true;
         return cocktail;
       } else {
         this.isDisabled = false;
         this.foundCocktail = true;
-        return cocktail.slice(0, end);
+        return cocktail.slice(0, this.counter);
       }
       return cocktail;
     },
@@ -186,12 +186,16 @@ export default {
     sortedList() {
       switch (this.sortBy) {
         case 'alco':
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           return this.cocktail.sort(sortByAlco);
         case 'name':
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           return this.cocktail.sort(sortByName);
         case 'price':
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           return this.cocktail.sort(sortByPrice);
         default:
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           return this.cocktail.sort(sortById);
       }
     },
