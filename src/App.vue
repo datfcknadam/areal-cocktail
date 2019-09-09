@@ -3,9 +3,7 @@
   <Content/>
 </div>
 </template>
-
 <script>
-
 import Content from './pages/Content.vue';
 
 export default {
@@ -14,9 +12,7 @@ export default {
     Content,
   },
 };
-
 </script>
-
 <style>
 .cocktail-list{
     display: grid;
