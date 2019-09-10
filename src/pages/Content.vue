@@ -6,30 +6,9 @@
       @color="valueFilterColor"
       @sortBy="valueSortBy"
       @removeFilter="cleanFilter"/>
-    <div id="content">
+      <div id="content">
       <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
-      <div @search="valueSearch" class="cocktail-list">
-        <div v-for="a in search_text(cocktailFilter())"
-          :key="a.id"
-          class="cocktail">
-          <div class="name">
-            <p>{{a.name}} </p>
-          </div>
-          <div class="volume">
-            {{a.vol}}
-          </div>
-          <img :src="a.src">
-          <div class=alco>
-            <b>Крепость:</b> {{a.alco}}
-          </div>
-          <div class="price">
-            {{a.price}}
-          </div>
-          <div class="ingredient">
-            <p><b>Состав:</b> {{a.ingredient}}</p>
-          </div>
-        </div>
-      </div>
+      <cocktail-list :cocktailIn="search_text(cocktailFilter())" />
     </div>
     <div class="btn-center">
       <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}" class="btn-see-more"
@@ -39,8 +18,9 @@
 </template>
 
 <script>
-import jsonCocktail from '../components/static/assets/json/jsonCocktail.json';
 import Navbar from '../components/Navbar/Navbar.vue';
+import CocktailList from '../components/Coctail-list/CocktailList.vue';
+import jsonCocktail from '../components/static/assets/json/jsonCocktail.json';
 
 const sortByAlco = function sortByAlco(d1, d2) {
   return (d1.alco > d2.alco) ? 1 : -1;
@@ -54,14 +34,13 @@ const sortByPrice = function sortByPrice(d1, d2) {
 const sortById = function sortById(d1, d2) {
   return (d1.id > d2.id) ? 1 : -1;
 };
-
 export default {
   components: {
     Navbar,
+    CocktailList,
   },
   data() {
     return {
-      cocktail: jsonCocktail.data,
       foundCocktail: true,
       isDisabled: false,
       counter: 6,
@@ -71,9 +50,13 @@ export default {
       filterByColor: null,
       filterByAlco: null,
       more: true,
+      cocktail: jsonCocktail.data,
     };
   },
   methods: {
+    arrCocktail(value) {
+      this.cocktail = value;
+    },
     cleanFilter() {
       this.filterByAlco = '';
       this.filterByColor = '';
@@ -141,7 +124,6 @@ export default {
           return alcoStr && color && taste;
         });
       }
-
       if (this.filterByTaste && this.filterByColor) {
         return this.cocktail.filter((value) => {
           const color = value.color.indexOf(this.filterByColor) !== -1;
@@ -228,32 +210,9 @@ export default {
 </script>
 
 <style>
-img {
-  height: 20vh;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
 #content {
   padding-left: 15vw;
   padding-right: 15vw;
   font-size: calc(0.5vw + 1vh);
-}
-
-.name {
-  font-size: calc(1vw + 1vh);
-  font-weight: 600;
-}
-
-.price::after {
-  content: "руб."
-}
-
-.volume::after {
-  content: "ml";
-}
-
-.alco::after {
-  content: "%";
 }
 </style>
