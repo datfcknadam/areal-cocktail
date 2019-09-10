@@ -86,34 +86,28 @@ export default {
       if (filterCocktail) {
         cocktail = filterCocktail;
       }
-      if (!cocktail) {
-        this.foundCocktail = false;
-        return cocktail;
+      if (search) {
+        search = search.trim().toLowerCase();
+        cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
       }
-      if (!search) {
+       if (!cocktail) {
+        this.foundCocktail = false;
         this.isDisabled = false;
-        this.foundCocktail = true;
-        cocktail = cocktail.slice(0, this.counter);
-        return cocktail;
       }
-      search = search.trim().toLowerCase();
-      cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
-      if (cocktail.length === 0) {
+      if (cocktail.length <= 6) {
         this.isDisabled = true;
         this.foundCocktail = false;
-      } else if (cocktail.length <= 6) {
-        this.isDisabled = true;
-        this.foundCocktail = true;
         return cocktail;
       } else {
         this.isDisabled = false;
         this.foundCocktail = true;
         return cocktail.slice(0, this.counter);
       }
-      return cocktail;
     },
     cocktailFilter() {
-      return this.cocktail
+      
+        if(!this.filterByTaste && !this.filterByColor && !this.filterByAlco) return this.cocktail;
+        return this.cocktail
         .filter(value => value.taste.indexOf(this.filterByTaste) !== -1)
         .filter(value => value.color.indexOf(this.filterByColor) !== -1)
         .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
