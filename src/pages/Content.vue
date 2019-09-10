@@ -113,55 +113,10 @@ export default {
       return cocktail;
     },
     cocktailFilter() {
-      if (this.filterByColor
-        && this.filterByAlco
-        && this.filterByTaste) {
-        return this.cocktail.filter((value) => {
-          const alcoStr = value.alcoStr.indexOf(this.filterByAlco) !== -1;
-          const color = value.color.indexOf(this.filterByColor) !== -1;
-          const taste = value.taste.indexOf(this.filterByTaste) !== -1;
-          this.placeholder = `${this.filterByColor} + ${this.filterByTaste} + ${this.filterByAlco}`;
-          return alcoStr && color && taste;
-        });
-      }
-      if (this.filterByTaste && this.filterByColor) {
-        return this.cocktail.filter((value) => {
-          const color = value.color.indexOf(this.filterByColor) !== -1;
-          const taste = value.taste.indexOf(this.filterByTaste) !== -1;
-          this.placeholder = `${this.filterByColor} + ${this.filterByTaste}`;
-          return color && taste;
-        });
-      }
-      if (this.filterByTaste && this.filterByAlco) {
-        return this.cocktail.filter((value) => {
-          const alcoStr = value.alcoStr.indexOf(this.filterByAlco) !== -1;
-          const taste = value.taste.indexOf(this.filterByTaste) !== -1;
-          this.placeholder = `${this.filterByAlco} + ${this.filterByTaste}`;
-          return alcoStr && taste;
-        });
-      }
-      if (this.filterByColor && this.filterByAlco) {
-        return this.cocktail.filter((value) => {
-          const alcoStr = value.alcoStr.indexOf(this.filterByAlco) !== -1;
-          const color = value.color.indexOf(this.filterByColor) !== -1;
-          this.placeholder = `${this.filterByAlco} + ${this.filterByColor}`;
-          return alcoStr && color;
-        });
-      }
-
-      if (this.filterByTaste) {
-        return this.cocktail
-          .filter(value => value.taste.indexOf(this.filterByTaste) !== -1);
-      }
-      if (this.filterByColor) {
-        return this.cocktail
-          .filter(value => value.color.indexOf(this.filterByColor) !== -1);
-      }
-      if (this.filterByAlco) {
-        return this.cocktail
-          .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
-      }
-      return this.cocktail;
+      return this.cocktail
+        .filter(value => value.taste.indexOf(this.filterByTaste) !== -1)
+        .filter(value => value.color.indexOf(this.filterByColor) !== -1)
+        .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
     },
   },
   computed: {
