@@ -1,31 +1,17 @@
 <template>
   <div class="cocktail-list">
-    <div @change="importValue" v-for="a in cocktailIn"
-      :key="a.id"
-      class="cocktail">
-      <div class="name">
-        <p>{{a.name}} </p>
-      </div>
-      <div class="volume">
-        {{a.vol}}
-      </div>
-      <img :src="a.src">
-      <div class="alco">
-        <b>Крепость:</b> {{a.alco}}
-      </div>
-      <div class="price">
-        {{a.price}}
-      </div>
-      <div class="ingredient">
-        <p><b>Состав:</b> {{a.ingredient}}</p>
-      </div>
-    </div>
+    <!--Все таки вынести в отдельный компонент CocktailCard и переименовать Coctail-list папку и название компонента-->
+    <cocktail-card
+      v-for="a in cocktailIn"
+      :item="a"
+      @change="importValue"
+      />
   </div>
 </template>
 <script>
 
 export default {
-  name: 'CoctailList',
+  name: 'CocktailList',
   props: {
     cocktailIn: {
       type: Array,
