@@ -76,7 +76,7 @@ export default {
         search = search.trim().toLowerCase();
         cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
       }
-      if (cocktail.length === 0) {
+      if (!cocktail.length) {
         this.foundCocktail = false;
         this.isDisabled = true;
         return cocktail;
