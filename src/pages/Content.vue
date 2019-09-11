@@ -54,9 +54,6 @@ export default {
     };
   },
   methods: {
-    arrCocktail(value) {
-      this.cocktail = value;
-    },
     cleanFilter() {
       this.filterByAlco = '';
       this.filterByColor = '';
