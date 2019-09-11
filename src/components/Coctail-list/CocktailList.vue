@@ -13,7 +13,7 @@
       </div>
       <img :src="a.src">
       <div class="alco">
-        <b>Крепость:</b> {{a.alco}}
+        <b>Крепкость:</b> {{a.alco}}
       </div>
       <div class="price">
         {{a.price}}
