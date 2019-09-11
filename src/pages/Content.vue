@@ -90,24 +90,24 @@ export default {
         search = search.trim().toLowerCase();
         cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
       }
-       if (!cocktail) {
+      if (cocktail.length <= 0) {
         this.foundCocktail = false;
-        this.isDisabled = false;
-      }
-      if (cocktail.length <= 6) {
         this.isDisabled = true;
-        this.foundCocktail = false;
+        console.log(cocktail.length);
         return cocktail;
-      } else {
-        this.isDisabled = false;
-        this.foundCocktail = true;
-        return cocktail.slice(0, this.counter);
       }
+      if (cocktail.length <= 6 && cocktail.length > 0) {
+        this.isDisabled = true;
+        this.foundCocktail = true;
+        return cocktail;
+      }
+      this.isDisabled = false;
+      this.foundCocktail = true;
+      return cocktail.slice(0, this.counter);
     },
     cocktailFilter() {
-      
-        if(!this.filterByTaste && !this.filterByColor && !this.filterByAlco) return this.cocktail;
-        return this.cocktail
+      if (!this.filterByTaste && !this.filterByColor && !this.filterByAlco) return this.cocktail;
+      return this.cocktail
         .filter(value => value.taste.indexOf(this.filterByTaste) !== -1)
         .filter(value => value.color.indexOf(this.filterByColor) !== -1)
         .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
