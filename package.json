@@ -32,7 +32,7 @@
     "vue-loader": "^13.5.0",
     "vue-template-compiler": "^2.5.3",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
+    "webpack-dev-server": "^3.1.11",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-webpack": "^0.10.1",
