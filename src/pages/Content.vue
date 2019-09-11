@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar @search="valueSearch"
+    <Navbar :infoPlaceholder="placeholder" @search="valueSearch"
       @taste="valueFilterTaste"
       @alco="valueFilterAlco"
       @color="valueFilterColor"
@@ -11,7 +11,7 @@
       <cocktail-list :cocktailIn="search_text(cocktailFilter())" />
     </div>
     <div class="btn-center">
-      <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}" class="btn-see-more"
+      <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}"
         @click="counter += 6">Показать еще</a>
     </div>
   </div>
@@ -51,6 +51,7 @@ export default {
       filterByAlco: null,
       more: true,
       cocktail: jsonCocktail.data,
+      placeholder: 'Текила...',
     };
   },
   methods: {
@@ -103,6 +104,7 @@ export default {
     },
     cocktailFilter() {
       if (!this.filterByTaste && !this.filterByColor && !this.filterByAlco) return this.cocktail;
+      this.placeholder = `${this.filterByTaste} ${this.filterByColor} ${this.filterByAlco}`;
       return this.cocktail
         .filter(value => value.taste.indexOf(this.filterByTaste) !== -1)
         .filter(value => value.color.indexOf(this.filterByColor) !== -1)
@@ -155,9 +157,40 @@ export default {
 </script>
 
 <style>
+.not_found{
+    display: none;
+}
+
+.disabled{
+    display: none;
+}
 #content {
   padding-left: 15vw;
   padding-right: 15vw;
   font-size: calc(0.5vw + 1vh);
+}
+.btn-center > a{
+    width: 20vw;
+    height: 5vh;
+    background: #f4ddb2;
+    font-size: 3vh;
+    border-radius: 60px;
+    padding: .8em 1em calc(.8em + 3px);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.btn-center > a:active{
+    background: linear-gradient(114deg, #f4ddb2, #b9b9b9);
+}
+.btn-center > a:hover{
+    background: linear-gradient(114deg,#b9b9b9,#f4ddb2 );
+}
+.btn-center{
+    text-align: center;
+    margin-top: 6vh;
+    margin-bottom: 8vh;
 }
 </style>

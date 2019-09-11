@@ -1,12 +1,12 @@
 <template>
   <div>
     <b-dropdown-item
-      v-for="value
-      in dropdownItemSortBy"
-      :key="'sort-' + value.id"
-      @click="inputSortBy(value.value)"
+      v-for="value in dropdownItemSortBy"
+      :text="value.name"
+      :key="value.id"
       href="#"
-    >{{value.name}}</b-dropdown-item>
+      @click="inputSortBy(value.value)"
+    />
   </div>
 </template>
 <script>
