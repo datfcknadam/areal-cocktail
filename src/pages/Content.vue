@@ -90,7 +90,6 @@ export default {
       if (cocktail.length <= 0) {
         this.foundCocktail = false;
         this.isDisabled = true;
-        console.log(cocktail.length);
         return cocktail;
       }
       if (cocktail.length <= 6 && cocktail.length > 0) {
