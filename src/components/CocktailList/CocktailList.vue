@@ -1,33 +1,20 @@
 <template>
   <div class="cocktail-list">
-    <div v-for="a in cocktailIn"
+    <cocktail-card v-for="a in cocktailIn"
       :key="a.id"
       class="cocktail"
       @change="importValue"
-      >
-      <div class="name">
-        <p>{{a.name}} </p>
-      </div>
-      <div class="volume">
-        {{a.vol}}
-      </div>
-      <img :src="a.src">
-      <div class="alco">
-        <b>Крепкость:</b> {{a.alco}}
-      </div>
-      <div class="price">
-        {{a.price}}
-      </div>
-      <div class="ingredient">
-        <p><b>Состав:</b> {{a.ingredient}}</p>
-      </div>
+      :item="a"/>
     </div>
-  </div>
 </template>
 <script>
+import CocktailCard from './CocktailCard.vue';
 
 export default {
-  name: 'CoctailList',
+  name: 'CocktailList',
+  components: {
+    CocktailCard,
+  },
   props: {
     cocktailIn: {
       type: Array,
@@ -42,24 +29,6 @@ export default {
 
 </script>
 <style scoped>
-.name {
-  font-size: calc(1vw + 1vh);
-  font-weight: 600;
-}
-.price::after {
-  content: "руб."
-}
-.volume::after {
-  content: "ml";
-}
-.alco::after {
-  content: "%";
-}
-img {
-  height: 20vh;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
 .cocktail-list > div{
     padding: calc(1vh + 2vw);
     text-align: center;

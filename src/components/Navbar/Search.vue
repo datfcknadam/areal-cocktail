@@ -18,7 +18,6 @@ export default {
   data() {
     return {
       search: null,
-      placeholder: 'Текила...',
     };
   },
   methods: {

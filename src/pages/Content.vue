@@ -1,14 +1,16 @@
 <template>
   <div>
-    <Navbar :infoPlaceholder="placeholder" @search="valueSearch"
+    <Navbar
+      :infoPlaceholder="placeholder"
+      @search="valueSearch"
       @taste="valueFilterTaste"
       @alco="valueFilterAlco"
       @color="valueFilterColor"
       @sortBy="valueSortBy"
       @removeFilter="cleanFilter"/>
-      <div id="content">
+    <div id="content">
       <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
-      <cocktail-list :cocktailIn="search_text(cocktailFilter())" />
+      <cocktail-list :cocktailIn="search_text(cocktailFilter())"/>
     </div>
     <div class="btn-center">
       <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}"
@@ -19,21 +21,9 @@
 
 <script>
 import Navbar from '../components/Navbar/Navbar.vue';
-import CocktailList from '../components/Coctail-list/CocktailList.vue';
+import CocktailList from '../components/CocktailList/CocktailList.vue';
 import jsonCocktail from '../components/static/assets/json/jsonCocktail.json';
 
-const sortByAlco = function sortByAlco(d1, d2) {
-  return (d1.alco > d2.alco) ? 1 : -1;
-};
-const sortByName = function sortByName(d1, d2) {
-  return (d1.name > d2.name) ? 1 : -1;
-};
-const sortByPrice = function sortByPrice(d1, d2) {
-  return (d1.price > d2.price) ? 1 : -1;
-};
-const sortById = function sortById(d1, d2) {
-  return (d1.id > d2.id) ? 1 : -1;
-};
 export default {
   components: {
     Navbar,
@@ -46,9 +36,9 @@ export default {
       counter: 6,
       sortBy: '',
       search: '',
-      filterByTaste: null,
-      filterByColor: null,
-      filterByAlco: null,
+      filterByTaste: '',
+      filterByColor: '',
+      filterByAlco: '',
       more: true,
       cocktail: jsonCocktail.data,
       placeholder: 'Текила...',
@@ -77,23 +67,21 @@ export default {
       this.sortBy = value;
     },
     search_text(filterCocktail) {
-      let {
-        search,
-      } = this;
       let cocktail = this.sortedList;
       if (filterCocktail) {
         cocktail = filterCocktail;
       }
+      let { search } = this;
       if (search) {
         search = search.trim().toLowerCase();
         cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(search) !== -1);
       }
-      if (cocktail.length <= 0) {
+      if (cocktail.length === 0) {
         this.foundCocktail = false;
         this.isDisabled = true;
         return cocktail;
       }
-      if (cocktail.length <= 6 && cocktail.length > 0) {
+      if (cocktail.length <= 6) {
         this.isDisabled = true;
         this.foundCocktail = true;
         return cocktail;
@@ -110,23 +98,21 @@ export default {
         .filter(value => value.color.indexOf(this.filterByColor) !== -1)
         .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
     },
+    sortByParam(array, param) {
+      return [].concat(array).sort((d1, d2) => {
+        const firstValue = d1[param];
+        const secondValue = d2[param];
+        if (firstValue === secondValue) {
+          return 0;
+        }
+        return firstValue > secondValue ? 1 : -1;
+      });
+    },
   },
   computed: {
     sortedList() {
-      switch (this.sortBy) {
-        case 'alco':
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          return this.cocktail.sort(sortByAlco);
-        case 'name':
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          return this.cocktail.sort(sortByName);
-        case 'price':
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          return this.cocktail.sort(sortByPrice);
-        default:
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          return this.cocktail.sort(sortById);
-      }
+      const sortKey = this.sortBy || 'id';
+      return this.sortByParam(this.cocktail, sortKey);
     },
   },
   watch: {
@@ -157,19 +143,19 @@ export default {
 </script>
 
 <style>
-.not_found{
+  .not_found{
     display: none;
-}
+  }
 
-.disabled{
+  .disabled{
     display: none;
-}
-#content {
-  padding-left: 15vw;
-  padding-right: 15vw;
-  font-size: calc(0.5vw + 1vh);
-}
-.btn-center > a{
+  }
+  #content {
+    padding-left: 15vw;
+    padding-right: 15vw;
+    font-size: calc(0.5vw + 1vh);
+  }
+  .btn-center > a{
     width: 20vw;
     height: 5vh;
     background: #f4ddb2;
@@ -181,16 +167,16 @@ export default {
     font-weight: 700;
     transition: 0.2s;
     cursor: pointer;
-}
-.btn-center > a:active{
+  }
+  .btn-center > a:active{
     background: linear-gradient(114deg, #f4ddb2, #b9b9b9);
-}
-.btn-center > a:hover{
+  }
+  .btn-center > a:hover{
     background: linear-gradient(114deg,#b9b9b9,#f4ddb2 );
-}
-.btn-center{
+  }
+  .btn-center{
     text-align: center;
     margin-top: 6vh;
     margin-bottom: 8vh;
-}
+  }
 </style>

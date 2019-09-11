@@ -3,7 +3,7 @@
     <b-dropdown-item
       v-for="value in item"
       v-text="value.name"
-      :key="itemsKey + value.id"
+      :key="itemsKey+ '-' + value.id"
       href="#"
       @click="click(value.value)"
     />
