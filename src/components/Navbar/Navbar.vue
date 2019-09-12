@@ -31,10 +31,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Search from './Search.vue';
 import Dropdown from './Dropdown.vue';
 import DropdownItemSortBy from './DropdownItemSortBy.vue';
-import jsonDropdownItem from '../static/assets/json/dropdownItem.json';
 
 export default {
   components: {
@@ -45,29 +45,10 @@ export default {
   props: {
     infoPlaceholder: String,
   },
-  data() {
-    return {
-      dropdowns: {
-        alco: {
-          text: 'Крепкость',
-          item: jsonDropdownItem.alco,
-        },
-        color: {
-          text: 'Цвет',
-          item: jsonDropdownItem.color,
-        },
-        taste: {
-          text: 'Вкус',
-          item: jsonDropdownItem.taste,
-        },
-      },
-    };
-  },
-  computed: {},
+  computed: mapState({
+    dropdowns: state => state.navbar.dropdownsFilter,
+  }),
   methods: {
-    click(type, event) {
-      this.$emit(type, event);
-    },
     inputChanged(search) {
       this.$emit('search', search);
     },
