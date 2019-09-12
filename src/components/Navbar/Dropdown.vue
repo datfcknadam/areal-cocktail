@@ -5,11 +5,12 @@
       v-text="value.name"
       :key="itemsKey+ '-' + value.id"
       href="#"
-      @click="click(value.value)"
+      @click="changeFilter(item, value.value)"
     />
   </b-nav-dropdown>
 </template>
 <script>
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Dropdown',
@@ -24,11 +25,9 @@ export default {
     return {
     };
   },
-  methods: {
-    click(value) {
-      this.$emit('click', value);
-    },
-  },
+  methods: mapActions('navbar', [
+    'changeFilter',
+  ]),
 };
 
 </script>

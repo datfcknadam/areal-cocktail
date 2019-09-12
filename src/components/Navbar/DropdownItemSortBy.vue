@@ -10,19 +10,12 @@
   </div>
 </template>
 <script>
-import jsonDropdownItemSortBy from '../static/assets/json/dropdownItemSortBy.json';
+import { mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      dropdownItemSortBy: jsonDropdownItemSortBy.data,
-    };
-  },
-  methods: {
-    inputSortBy(inputValue) {
-      this.$emit('sortBy', inputValue);
-    },
-  },
+  computed: mapState({
+    dropdownItemSortBy: state => state.navbar.dropdownSort,
+  }),
 
 };
 </script>
