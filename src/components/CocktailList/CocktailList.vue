@@ -1,32 +1,25 @@
 <template>
   <div class="cocktail-list">
-    <cocktail-card v-for="a in cocktailIn"
+    <cocktail-card v-for="a in cocktail"
       :key="a.id"
       class="cocktail"
-      @change="importValue"
       :item="a"/>
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import CocktailCard from './CocktailCard.vue';
+
 
 export default {
   name: 'CocktailList',
   components: {
     CocktailCard,
   },
-  props: {
-    cocktailIn: {
-      type: Array,
-    },
-  },
-  methods: {
-    importValue() {
-      this.$emit('cocktail', this.cocktail);
-    },
-  },
+  computed: mapGetters('navbar', {
+    cocktail: 'dynamicCocktailList',
+  }),
 };
-
 </script>
 <style scoped>
 .cocktail-list > div{

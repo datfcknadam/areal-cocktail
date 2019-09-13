@@ -5,7 +5,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <Search :infoPlaceholder="infoPlaceholder" @search="inputChanged"/>
+          <Search :infoPlaceholder="infoPlaceholder" />
             <b-collapse id="collapse-1" class="mt-2">
               <dropdown
                 v-for="(dropdown, key) in dropdowns"
