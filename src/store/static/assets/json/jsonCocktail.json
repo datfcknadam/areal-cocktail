@@ -2,7 +2,7 @@
   "data": [{
     "id": 0,
     "name": "Цвета осени",
-    "src": "src/components/static/assets/image/icon_1537758161-Black-Cherry__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1537758161-Black-Cherry__highres.jpg",
     "alco": 40,
     "ingredient": "фрукты, овощи",
     "price": "450",
@@ -13,7 +13,7 @@
   }, {
     "id": 1,
     "name": "Розовый сад",
-    "src": "src/components/static/assets/image/Rose_garden.jpg",
+    "src": "src/store/static/assets/image/Rose_garden.jpg",
     "alco": "14",
     "ingredient": "фрукты, овощи",
     "price": "150",
@@ -25,7 +25,7 @@
   }, {
     "id": 2,
     "name": "Королевский лимонад",
-    "src": "src/components/static/assets/image/icon_1537766175-Lemonade-Royale__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1537766175-Lemonade-Royale__highres.jpg",
     "alco": "18",
     "ingredient": "фрукты, овощи",
     "price": "550",
@@ -37,7 +37,7 @@
   }, {
     "id": 3,
     "name": "Пойдем домой",
-    "src": "src/components/static/assets/image/icon_1538166598-Take_me_home-HiRes.jpg",
+    "src": "src/store/static/assets/image/icon_1538166598-Take_me_home-HiRes.jpg",
     "alco": "18",
     "ingredient": "фрукты, овощи фруктыфруктыфруктыфрукты",
     "price": "450",
@@ -48,7 +48,7 @@
   }, {
     "id": 4,
     "name": "Бока-чика",
-    "src": "src/components/static/assets/image/icon_1540546526-Boca-Chica__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1540546526-Boca-Chica__highres.jpg",
     "alco": "12",
     "ingredient": "фрукты, овощи",
     "price": "150",
@@ -60,7 +60,7 @@
   }, {
     "id": 5,
     "name": "Альма",
-    "src": "src/components/static/assets/image/icon_1551358867-Alma_800.jpg",
+    "src": "src/store/static/assets/image/icon_1551358867-Alma_800.jpg",
     "alco": "17",
     "ingredient": "фрукты, овощи",
     "price": "350",
@@ -72,7 +72,7 @@
   }, {
     "id": 6,
     "name": "Тай",
-    "src": "src/components/static/assets/image/icon_1556010828-Thai-Sling__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1556010828-Thai-Sling__highres.jpg",
     "alco": "18",
     "ingredient": "фрукты, овощи",
     "price": "350",
@@ -84,7 +84,7 @@
   }, {
     "id": 7,
     "name": "Олдфэшн",
-    "src": "src/components/static/assets/image/icon_1556121518-Old-fashioned-w800px.jpg",
+    "src": "src/store/static/assets/image/icon_1556121518-Old-fashioned-w800px.jpg",
     "alco": "40",
     "ingredient": "фрукты, овощи",
     "price": "350",
@@ -96,7 +96,7 @@
   }, {
     "id": 8,
     "name": "Пармигиано",
-    "src": "src/components/static/assets/image/icon_1556461694-Parmigiano_sour_800.jpg",
+    "src": "src/store/static/assets/image/icon_1556461694-Parmigiano_sour_800.jpg",
     "alco": "14",
     "ingredient": "фрукты, овощи",
     "price": "450",
@@ -108,7 +108,7 @@
   }, {
     "id": 9,
     "name": "Скользкий",
-    "src": "src/components/static/assets/image/icon_1556798272-Slippery-Nipple__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1556798272-Slippery-Nipple__highres.jpg",
     "alco": "15",
     "ingredient": "фрукты, овощи",
     "price": "450",
@@ -120,7 +120,7 @@
   }, {
     "id": 10,
     "name": "Северный",
-    "src": "src/components/static/assets/image/icon_1557228199-North-Sling__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1557228199-North-Sling__highres.jpg",
     "alco": "18",
     "ingredient": "фрукты, овощи",
     "price": "350",
@@ -132,7 +132,7 @@
   }, {
     "id": 11,
     "name": "Летний пунш",
-    "src": "src/components/static/assets/image/icon_1557229223-Spring-Punch__highres.jpg",
+    "src": "src/store/static/assets/image/icon_1557229223-Spring-Punch__highres.jpg",
     "alco": "0",
     "ingredient": "фрукты, овощи",
     "price": "250",
@@ -144,7 +144,7 @@
   }, {
     "id": 12,
     "name": "Яблочный лимонад",
-    "src": "src/components/static/assets/image/icon_Apple-Lemonade__highres.jpg",
+    "src": "src/store/static/assets/image/icon_Apple-Lemonade__highres.jpg",
     "alco": "0",
     "ingredient": "фрукты, овощи",
     "price": "250",
@@ -156,7 +156,7 @@
   }, {
     "id": 13,
     "name": "Мохито",
-    "src": "src/components/static/assets/image/icon_Bacardi_shooting_5_800.jpg",
+    "src": "src/store/static/assets/image/icon_Bacardi_shooting_5_800.jpg",
     "alco": "39",
     "ingredient": "\u0411\u0435\u043B\u044B\u0439 \u0440\u043E\u043C Bacardi 50 \u043C\u043B, \u0421\u0430\u0445\u0430\u0440\u043D\u044B\u0439 \u0441\u0438\u0440\u043E\u043F 15\t\u043C\u043B, \u0421\u043E\u0434\u043E\u0432\u0430\u044F 100 \u043C\u043B, \u041B\u0430\u0439\u043C 80\u0433, \u041C\u044F\u0442\u0430 3\u0433, \u0414\u0440\u043E\u0431\u043B\u0435\u043D\u044B\u0439 \u043B\u0435\u0434 200\u0433",
     "price": "350",
@@ -168,7 +168,7 @@
   }, {
     "id": 14,
     "name": "Апероль Шприц",
-    "src": "src/components/static/assets/image/icon_1537863520-Aperol_spritz-HiRes.jpg",
+    "src": "src/store/static/assets/image/icon_1537863520-Aperol_spritz-HiRes.jpg",
     "alco": "25",
     "ingredient": "фрукты, овощи",
     "price": "550",
@@ -179,7 +179,7 @@
   }, {
     "id": 15,
     "name": "???",
-    "src": "src/components/static/assets/image/icon_com_highres2.jpg",
+    "src": "src/store/static/assets/image/icon_com_highres2.jpg",
     "alco": "78",
     "ingredient": "фрукты, овощи",
     "price": "500",
@@ -191,7 +191,7 @@
   }, {
     "id": 16,
     "name": "Клюквенный бурбон",
-    "src": "src/components/static/assets/image/icon_Cranberry-infused_bourbon-highres.jpg",
+    "src": "src/store/static/assets/image/icon_Cranberry-infused_bourbon-highres.jpg",
     "alco": "38",
     "ingredient": "фрукты, овощи",
     "price": "400",
