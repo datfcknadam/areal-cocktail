@@ -5,7 +5,7 @@
       v-text="value.name"
       :key="'sort-' + value.id"
       href="#"
-      @click="sortCocktail(value.value)"
+      @click="setSort(value.value)"
     />
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     dropdownItemSortBy: state => state.navbar.dropdownSort,
   }),
   methods: mapMutations('navbar', [
-    'sortCocktail',
+    'setSort',
   ]),
 
 };

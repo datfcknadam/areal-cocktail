@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import Navbar from '../components/Navbar/Navbar.vue';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
 
@@ -50,7 +50,7 @@ export default {
       this.sortBy = value;
     },
     search_text(filterCocktail) {
-      let { cocktail } = this;
+      let cocktail = this.sortedList;
       if (filterCocktail) {
         cocktail = filterCocktail;
       }
@@ -81,24 +81,18 @@ export default {
         .filter(value => value.color.indexOf(this.filterByColor) !== -1)
         .filter(value => value.alcoStr.indexOf(this.filterByAlco) !== -1);
     },
-    sortByParam(array, param) {
-      return [].concat(array).sort((d1, d2) => {
-        const firstValue = d1[param];
-        const secondValue = d2[param];
-        if (firstValue === secondValue) {
-          return 0;
-        }
-        return firstValue > secondValue ? 1 : -1;
-      });
-    },
   },
-  computed: mapState({
-    filterByAlco: state => state.navbar.alco,
-    filterByColor: state => state.navbar.color,
-    filterByTaste: state => state.navbar.taste,
-    sortBy: state => state.navbar.sortBy,
-    cocktail: state => state.navbar.cocktail,
-  }),
+  computed: {
+    ...mapState({
+      filterByAlco: state => state.navbar.alco,
+      filterByColor: state => state.navbar.color,
+      filterByTaste: state => state.navbar.taste,
+      sortBy: state => state.navbar.sortBy,
+    }),
+    ...mapGetters('navbar', {
+      sortedList: 'sortedList',
+    }),
+  },
   watch: {
     sortBy(newSortBy) {
       localStorage.sortBy = newSortBy;

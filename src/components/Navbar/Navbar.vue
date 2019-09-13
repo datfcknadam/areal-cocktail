@@ -16,7 +16,7 @@
               />
               <b-button
                 variant="dark"
-                @click="cancelFilter"
+                @click="cancelFilter()"
                 right
             >Сбросить фильтр</b-button>
             </b-collapse>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Search from './Search.vue';
 import Dropdown from './Dropdown.vue';
 import DropdownItemSortBy from './DropdownItemSortBy.vue';
@@ -48,5 +48,8 @@ export default {
   computed: mapState({
     dropdowns: state => state.navbar.dropdownsFilter,
   }),
+  methods: mapMutations('navbar', [
+    'cancelFilter',
+  ]),
 };
 </script>

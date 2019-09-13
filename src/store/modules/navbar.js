@@ -19,17 +19,13 @@ const mutations = {
         break;
     }
   },
-  sortCocktail(state, value) {
-    const sortKey = value || 'id';
-    state.cocktail = state.cocktail.sort((d1, d2) => {
-      const firstValue = d1[sortKey];
-      const secondValue = d2[sortKey];
-      if (firstValue === secondValue) {
-        return 0;
-      }
-      return firstValue > secondValue ? 1 : -1;
-    });
-    console.log(state.cocktail);
+  cancelFilter(state) {
+    state.alco = '';
+    state.color = '';
+    state.taste = '';
+  },
+  setSort(state, value) {
+    state.sortKey = value;
   },
 };
 const actions = {
@@ -37,8 +33,17 @@ const actions = {
 
 };
 const getters = {
-
-
+  sortedList(state) {
+    const newSortKey = state.sortKey || 'id';
+    return [].concat.state.cocktail.sort((d1, d2) => {
+      const firstValue = d1[newSortKey];
+      const secondValue = d2[newSortKey];
+      if (firstValue === secondValue) {
+        return 0;
+      }
+      return firstValue > secondValue ? 1 : -1;
+    });
+  },
 };
 
 
