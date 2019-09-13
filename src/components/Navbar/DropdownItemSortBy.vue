@@ -5,17 +5,21 @@
       v-text="value.name"
       :key="'sort-' + value.id"
       href="#"
-      @click="inputSortBy(value.value)"
+      @click="sortCocktail(value.value)"
     />
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
+
 
 export default {
   computed: mapState({
     dropdownItemSortBy: state => state.navbar.dropdownSort,
   }),
+  methods: mapMutations('navbar', [
+    'sortCocktail',
+  ]),
 
 };
 </script>

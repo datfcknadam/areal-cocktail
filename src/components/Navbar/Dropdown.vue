@@ -5,12 +5,12 @@
       v-text="value.name"
       :key="itemsKey+ '-' + value.id"
       href="#"
-      @click="changeFilter(item, value.value)"
+      @click="setFilter({ itemsKey, value })"
     />
   </b-nav-dropdown>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Dropdown',
@@ -23,10 +23,11 @@ export default {
   },
   data() {
     return {
+      valueItem: null,
     };
   },
-  methods: mapActions('navbar', [
-    'changeFilter',
+  methods: mapMutations('navbar', [
+    'setFilter',
   ]),
 };
 

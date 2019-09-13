@@ -3,9 +3,6 @@
     <Navbar
       :infoPlaceholder="placeholder"
       @search="valueSearch"
-      @taste="valueFilterTaste"
-      @alco="valueFilterAlco"
-      @color="valueFilterColor"
       @sortBy="valueSortBy"
       @removeFilter="cleanFilter"/>
     <div id="content">
@@ -20,9 +17,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Navbar from '../components/Navbar/Navbar.vue';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
-import jsonCocktail from '../components/static/assets/json/jsonCocktail.json';
 
 export default {
   components: {
@@ -34,13 +31,8 @@ export default {
       foundCocktail: true,
       isDisabled: false,
       counter: 6,
-      sortBy: '',
       search: '',
-      filterByTaste: '',
-      filterByColor: '',
-      filterByAlco: '',
       more: true,
-      cocktail: jsonCocktail.data,
       placeholder: 'Текила...',
     };
   },
@@ -54,20 +46,11 @@ export default {
     valueSearch(value) {
       this.search = value;
     },
-    valueFilterTaste(value) {
-      this.filterByTaste = value;
-    },
-    valueFilterAlco(value) {
-      this.filterByAlco = value;
-    },
-    valueFilterColor(value) {
-      this.filterByColor = value;
-    },
     valueSortBy(value) {
       this.sortBy = value;
     },
     search_text(filterCocktail) {
-      let cocktail = this.sortedList;
+      let { cocktail } = this;
       if (filterCocktail) {
         cocktail = filterCocktail;
       }
@@ -109,12 +92,13 @@ export default {
       });
     },
   },
-  computed: {
-    sortedList() {
-      const sortKey = this.sortBy || 'id';
-      return this.sortByParam(this.cocktail, sortKey);
-    },
-  },
+  computed: mapState({
+    filterByAlco: state => state.navbar.alco,
+    filterByColor: state => state.navbar.color,
+    filterByTaste: state => state.navbar.taste,
+    sortBy: state => state.navbar.sortBy,
+    cocktail: state => state.navbar.cocktail,
+  }),
   watch: {
     sortBy(newSortBy) {
       localStorage.sortBy = newSortBy;

@@ -13,7 +13,6 @@
                 :itemsKey="key"
                 :key="key"
                 :item="dropdown.item"
-                @click="click(key, $event)"
               />
               <b-button
                 variant="dark"
@@ -22,7 +21,7 @@
             >Сбросить фильтр</b-button>
             </b-collapse>
             <b-nav-item-dropdown variant="dark" class="m-2" text="Сортировать" right>
-              <DropdownItemSortBy @sortBy="inputSortBy"/>
+              <DropdownItemSortBy/>
             </b-nav-item-dropdown>
         </b-nav-form>
       </b-navbar-nav>
@@ -31,10 +30,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 import Search from './Search.vue';
 import Dropdown from './Dropdown.vue';
 import DropdownItemSortBy from './DropdownItemSortBy.vue';
+
 
 export default {
   components: {
@@ -48,16 +48,5 @@ export default {
   computed: mapState({
     dropdowns: state => state.navbar.dropdownsFilter,
   }),
-  methods: {
-    inputChanged(search) {
-      this.$emit('search', search);
-    },
-    cancelFilter() {
-      this.$emit('removeFilter', true);
-    },
-    inputSortBy(value) {
-      this.$emit('sortBy', value);
-    },
-  },
 };
 </script>
