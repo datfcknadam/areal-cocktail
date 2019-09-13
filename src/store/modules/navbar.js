@@ -67,6 +67,7 @@ const mutations = {
     state.filterByAlco = '';
     state.filterByColor = '';
     state.filterByTaste = '';
+    state.placeholder = 'Текила...';
   },
   setSort(state, value) {
     state.sortKey = value;
