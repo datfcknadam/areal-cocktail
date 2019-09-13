@@ -3,13 +3,14 @@
     <b-dropdown-item
       v-for="value in item"
       v-text="value.name"
-      :key="itemsKey + value.id"
+      :key="itemsKey+ '-' + value.id"
       href="#"
-      @click="click(value.value)"
+      @click="setFilter({ itemsKey, value })"
     />
   </b-nav-dropdown>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Dropdown',
@@ -22,13 +23,12 @@ export default {
   },
   data() {
     return {
+      valueItem: null,
     };
   },
-  methods: {
-    click(value) {
-      this.$emit('click', value);
-    },
-  },
+  methods: mapMutations('navbar', [
+    'setFilter',
+  ]),
 };
 
 </script>

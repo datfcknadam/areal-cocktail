@@ -1,28 +1,25 @@
 <template>
   <div>
     <b-dropdown-item
-      v-for="value
-      in dropdownItemSortBy"
+      v-for="value in dropdownItemSortBy"
+      v-text="value.name"
       :key="'sort-' + value.id"
-      @click="inputSortBy(value.value)"
       href="#"
-    >{{value.name}}</b-dropdown-item>
+      @click="setSort(value.value)"
+    />
   </div>
 </template>
 <script>
-import jsonDropdownItemSortBy from '../static/assets/json/dropdownItemSortBy.json';
+import { mapState, mapMutations } from 'vuex';
+
 
 export default {
-  data() {
-    return {
-      dropdownItemSortBy: jsonDropdownItemSortBy.data,
-    };
-  },
-  methods: {
-    inputSortBy(inputValue) {
-      this.$emit('sortBy', inputValue);
-    },
-  },
+  computed: mapState({
+    dropdownItemSortBy: state => state.navbar.dropdownSort,
+  }),
+  methods: mapMutations('navbar', [
+    'setSort',
+  ]),
 
 };
 </script>

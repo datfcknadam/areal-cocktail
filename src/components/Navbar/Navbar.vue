@@ -5,7 +5,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <Search @search="inputChanged"/>
+          <Search />
             <b-collapse id="collapse-1" class="mt-2">
               <dropdown
                 v-for="(dropdown, key) in dropdowns"
@@ -13,16 +13,15 @@
                 :itemsKey="key"
                 :key="key"
                 :item="dropdown.item"
-                @click="click(key, $event)"
               />
               <b-button
                 variant="dark"
-                @click="cancelFilter"
+                @click="cancelFilter()"
                 right
             >Сбросить фильтр</b-button>
             </b-collapse>
             <b-nav-item-dropdown variant="dark" class="m-2" text="Сортировать" right>
-              <DropdownItemSortBy @sortBy="inputSortBy"/>
+              <DropdownItemSortBy/>
             </b-nav-item-dropdown>
         </b-nav-form>
       </b-navbar-nav>
@@ -31,10 +30,11 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
 import Search from './Search.vue';
 import Dropdown from './Dropdown.vue';
 import DropdownItemSortBy from './DropdownItemSortBy.vue';
-import jsonDropdownItem from '../static/assets/json/dropdownItem.json';
+
 
 export default {
   components: {
@@ -42,38 +42,11 @@ export default {
     Dropdown,
     DropdownItemSortBy,
   },
-  data() {
-    return {
-      dropdowns: {
-        alco: {
-          text: 'Крепкость',
-          item: jsonDropdownItem.alco,
-        },
-        color: {
-          text: 'Цвет',
-          item: jsonDropdownItem.color,
-        },
-        taste: {
-          text: 'Вкус',
-          item: jsonDropdownItem.taste,
-        },
-      },
-    };
-  },
-  computed: {},
-  methods: {
-    click(type, event) {
-      this.$emit(type, event);
-    },
-    inputChanged(search) {
-      this.$emit('search', search);
-    },
-    cancelFilter() {
-      this.$emit('removeFilter', true);
-    },
-    inputSortBy(value) {
-      this.$emit('sortBy', value);
-    },
-  },
+  computed: mapState({
+    dropdowns: state => state.navbar.dropdownsFilter,
+  }),
+  methods: mapMutations('navbar', [
+    'cancelFilter',
+  ]),
 };
 </script>

@@ -1,30 +1,29 @@
 <template>
   <div id="search">
     <b-form-input size="sm"
-      v-model="search"
-      @input="inputChanged"
-      :placeholder="placeholder"
+      :placeholder="infoPlaceholder"
       class="mr-sm-2"
+      @input="searchValue"
       />
-    <b-button v-b-toggle.collapse-1
-      variant="dark"
-      style="margin-left: 10vh;" right
+    <b-button v-b-toggle.collapse-1 variant="dark" right
     >Фильтровать</b-button>
   </div>
 </template>
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
-  data() {
-    return {
-      search: null,
-      placeholder: 'Текила...',
-    };
-  },
-  methods: {
-    inputChanged() {
-      this.$emit('search', this.search);
-    },
-  },
+  methods: mapMutations('navbar', [
+    'searchValue',
+  ]),
+  computed: mapState('navbar', {
+    infoPlaceholder: state => state.placeholder,
+  }),
 
 };
 </script>
+<style scoped>
+v-b-toggle.collapse-1{
+  margin-left: 10vh;
+}
+</style>
