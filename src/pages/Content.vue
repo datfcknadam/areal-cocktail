@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Navbar
-      :infoPlaceholder="placeholder"/>
+    <Navbar/>
     <div id="content">
       <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
       <cocktail-list/>
@@ -28,16 +27,15 @@ export default {
       foundCocktail: true,
       isDisabled: false,
       counter: 6,
-
     };
   },
   methods: {
   },
-  computed: mapState({
-    filterByAlco: state => state.navbar.alco,
-    filterByColor: state => state.navbar.color,
-    filterByTaste: state => state.navbar.taste,
-    cocktail: state => state.navbar.cocktail,
+  computed: mapState('navbar', {
+    filterByAlco: state => state.alco,
+    filterByColor: state => state.color,
+    filterByTaste: state => state.taste,
+    cocktail: state => state.cocktail,
   }),
   watch: {
     sortBy(newSortBy) {

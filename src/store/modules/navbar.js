@@ -22,10 +22,13 @@ const getters = {
       .filter(value => value.color.indexOf(state.filterByColor) !== -1)
       .filter(value => value.alcoStr.indexOf(state.filterByAlco) !== -1);
   },
-  dynamicCocktailList({ state }, { sortedList, cocktailFilter }) {
+  dynamicCocktailList(state, { sortedList, cocktailFilter }) {
     let cocktail = sortedList;
     if (cocktailFilter) {
       cocktail = cocktailFilter;
+    }
+    if (state.search) {
+      cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(state.search) !== -1);
     }
     if (!cocktail.length) {
       return cocktail;
@@ -82,7 +85,7 @@ const state = {
   foundCocktail: true,
   isDisabled: false,
   counter: 6,
-  search: 'оо',
+  search: null,
   placeholder: 'Текила...',
   cocktail: jsonCocktail.data,
   dropdownsFilter: {

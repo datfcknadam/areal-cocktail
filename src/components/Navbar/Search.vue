@@ -10,20 +10,15 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
-  props: {
-    infoPlaceholder: String,
-  },
-  data() {
-    return {
-      search: null,
-    };
-  },
   methods: mapMutations('navbar', [
     'searchValue',
   ]),
+  computed: mapState('navbar', {
+    infoPlaceholder: state => state.placeholder,
+  }),
 
 };
 </script>
