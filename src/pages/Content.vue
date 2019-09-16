@@ -2,6 +2,12 @@
   <div>
     <Navbar/>
     <div id="content">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
       <b-card v-if="!getCocktail.length"> Ничего не найдено :(</b-card>
       <cocktail-list/>
     </div>
@@ -35,11 +41,15 @@ export default {
     }),
   },
   mounted() {
-    this.$store.dispatch('navbar/loadCocktails', this.counter);
+    this.$store.dispatch('navbar/loadCocktails', [
+      this.counter,
+    ]);
   },
   watch: {
     counter() {
-      this.$store.dispatch('navbar/loadCocktails', this.counter);
+      this.$store.dispatch('navbar/loadCocktails', [
+        this.counter,
+      ]);
     },
   },
 };
