@@ -39,7 +39,7 @@ const mutations = {
     state.search = value.trim().toLowerCase();
   },
   seeMore(state) {
-    state.counter = +6;
+    state.counter += 6;
   },
   setFilter(state, { itemsKey, value }) {
     switch (itemsKey) {

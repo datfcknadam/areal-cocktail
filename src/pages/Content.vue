@@ -23,16 +23,13 @@ export default {
     Navbar,
     CocktailList,
   },
-  methods: mapMutations ('navbar', [
-      'seeMore'
-    ]),
-  computed: mapGetters ('navbar', [
-    'getCocktail'
+  methods: mapMutations('navbar', [
+    'seeMore',
   ]),
-  create() { 
-    counter: state => state.counter;
-  }
-}
+  computed: mapGetters('navbar', [
+    'getCocktail',
+  ]),
+};
 </script>
 
 <style>
