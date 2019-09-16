@@ -3,7 +3,7 @@
     <b-form-input size="sm"
       :placeholder="infoPlaceholder"
       class="mr-sm-2"
-      @input="searchValue"
+      @input="SET_SEARCH"
       />
     <b-button v-b-toggle.collapse-1 variant="dark" right
     >Фильтровать</b-button>
@@ -14,7 +14,7 @@ import { mapMutations, mapState } from 'vuex';
 
 export default {
   methods: mapMutations('navbar', [
-    'searchValue',
+    'SET_SEARCH',
   ]),
   computed: mapState('navbar', {
     infoPlaceholder: state => state.placeholder,

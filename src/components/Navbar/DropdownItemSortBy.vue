@@ -5,7 +5,7 @@
       v-text="value.name"
       :key="'sort-' + value.id"
       href="#"
-      @click="setSort(value.value)"
+      @click="SET_SORT(value.value)"
     />
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     dropdownItemSortBy: state => state.navbar.dropdownSort,
   }),
   methods: mapMutations('navbar', [
-    'setSort',
+    'SET_SORT',
   ]),
 
 };

@@ -6,14 +6,14 @@
       <cocktail-list/>
     </div>
     <div class="btn-center">
-      <a v-if="getCocktail.length > 6"
-        @click="seeMore()">Показать еще</a>
+      <a v-if="getCocktail.length >= 6"
+        @click="UPDATE_COUNTER()">Показать еще</a>
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 import Navbar from '../components/Navbar/Navbar.vue';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
 
@@ -24,22 +24,28 @@ export default {
     CocktailList,
   },
   methods: mapMutations('navbar', [
-    'seeMore',
+    'UPDATE_COUNTER',
   ]),
-  computed: mapGetters('navbar', [
-    'getCocktail',
-  ]),
+  computed: {
+    ...mapGetters('navbar', [
+      'getCocktail',
+    ]),
+    ...mapState('navbar', {
+      counter: state => state.counter,
+    }),
+  },
+  mounted() {
+    this.$store.dispatch('navbar/loadCocktails', this.counter);
+  },
+  watch: {
+    counter() {
+      this.$store.dispatch('navbar/loadCocktails', this.counter);
+    },
+  },
 };
 </script>
 
 <style>
-  .not_found{
-    display: none;
-  }
-
-  .disabled{
-    display: none;
-  }
   #content {
     padding-left: 15vw;
     padding-right: 15vw;
@@ -57,9 +63,6 @@ export default {
     font-weight: 700;
     transition: 0.2s;
     cursor: pointer;
-  }
-  .btn-center > a:active{
-    background: linear-gradient(114deg, #f4ddb2, #b9b9b9);
   }
   .btn-center > a:hover{
     background: linear-gradient(114deg,#b9b9b9,#f4ddb2 );
