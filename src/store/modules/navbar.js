@@ -24,12 +24,14 @@ const getters = {
   },
   getCocktail(state, { sortedList, cocktailFilter }) {
     let cocktail = sortedList;
+
     if (cocktailFilter) {
       cocktail = cocktailFilter;
     }
     if (state.search) {
       cocktail = cocktail.filter(value => value.name.toLowerCase().indexOf(state.search) !== -1);
     }
+
     return cocktail.slice(0, state.counter);
   },
 };
@@ -41,7 +43,7 @@ const mutations = {
   seeMore(state) {
     state.counter += 6;
   },
-  setFilter(state, { itemsKey, value }) {
+  SET_FILTER(state, { itemsKey, value }) {
     switch (itemsKey) {
       case 'alco':
         state.filterByAlco = value.value;
