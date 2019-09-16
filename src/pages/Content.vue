@@ -2,65 +2,33 @@
   <div>
     <Navbar/>
     <div id="content">
-      <b-card :class="{not_found: foundCocktail}"> Ничего не найдено :(</b-card>
+      <b-card v-if="!getCocktail.length"> Ничего не найдено :(</b-card>
       <cocktail-list/>
     </div>
     <div class="btn-center">
-      <a v-if="this.cocktail.length > counter" :class="{disabled: isDisabled}"
-        @click="counter += 6">Показать еще</a>
+      <a v-if="getCocktail.length > 6"
+        @click="seeMore()">Показать еще</a>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import Navbar from '../components/Navbar/Navbar.vue';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
+
 
 export default {
   components: {
     Navbar,
     CocktailList,
   },
-  data() {
-    return {
-      foundCocktail: true,
-      isDisabled: false,
-      counter: 6,
-    };
-  },
-  methods: {
-  },
-  computed: mapState('navbar', {
-    filterByAlco: state => state.alco,
-    filterByColor: state => state.color,
-    filterByTaste: state => state.taste,
-    cocktail: state => state.cocktail,
-  }),
-  watch: {
-    sortBy(newSortBy) {
-      localStorage.sortBy = newSortBy;
-    },
-    filterByColor(newFilterByColor) {
-      localStorage.filterByColor = newFilterByColor;
-    },
-    filterByTaste(newFilterByTaste) {
-      localStorage.filterByTaste = newFilterByTaste;
-    },
-    filterByAlco(newFilterByAlco) {
-      localStorage.filterByAlco = newFilterByAlco;
-    },
-  },
-  mounted() {
-    if (localStorage.sortBy) {
-      this.sortBy = localStorage.sortBy;
-    }
-    if (localStorage.filterByColor || localStorage.filterByTaste || localStorage.filterByAlco) {
-      this.filterByTaste = localStorage.filterByTaste;
-      this.filterByAlco = localStorage.filterByAlco;
-      this.filterByColor = localStorage.filterByColor;
-    }
-  },
+  methods: mapMutations('navbar', [
+    'seeMore',
+  ]),
+  computed: mapGetters('navbar', [
+    'getCocktail',
+  ]),
 };
 </script>
 

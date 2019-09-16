@@ -17,7 +17,7 @@ export default {
     CocktailCard,
   },
   computed: mapGetters('navbar', {
-    cocktail: 'dynamicCocktailList',
+    cocktail: 'getCocktail',
   }),
 };
 </script>
