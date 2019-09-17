@@ -2,7 +2,7 @@
   <div>
     <Navbar/>
       <b-pagination
-          v-if="rows >= counter"
+          v-if="getCocktail.length && rows >= counter"
           :total-rows="rows"
           :per-page="counter"
           v-model="currentPage"
