@@ -5,7 +5,7 @@
       v-text="value.name"
       :key="itemsKey+ '-' + value.id"
       href="#"
-      @click="setFilter({ itemsKey, value })"
+      @click="SET_FILTER({ itemsKey, value })"
     />
   </b-nav-dropdown>
 </template>
@@ -21,13 +21,8 @@ export default {
     },
     itemsKey: String,
   },
-  data() {
-    return {
-      valueItem: null,
-    };
-  },
   methods: mapMutations('navbar', [
-    'setFilter',
+    'SET_FILTER',
   ]),
 };
 

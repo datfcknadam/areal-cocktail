@@ -1,11 +1,17 @@
 export default {
-  searchValue(state, value) {
+  SET_TOTAL_COCKTAILS(state, data) {
+    state.totalCocktail = data;
+  },
+  SET_COCKTAILS(state, data) {
+    state.cocktail = data;
+  },
+  SET_SEARCH(state, value) {
     state.search = value.trim().toLowerCase();
   },
-  seeMore(state) {
+  UPDATE_COUNTER(state) {
     state.counter += 6;
   },
-  setFilter(state, { itemsKey, value }) {
+  SET_FILTER(state, { itemsKey, value }) {
     switch (itemsKey) {
       case 'alco':
         state.filterByAlco = value.value;
@@ -20,13 +26,14 @@ export default {
         break;
     }
   },
-  cancelFilter(state) {
+  CLEAR_FILTER(state) {
     state.filterByAlco = '';
     state.filterByColor = '';
     state.filterByTaste = '';
     state.placeholder = 'Текила...';
+    state.counter = 6;
   },
-  setSort(state, value) {
+  SET_SORT(state, value) {
     state.sortKey = value;
   },
 };

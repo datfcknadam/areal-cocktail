@@ -16,7 +16,7 @@
               />
               <b-button
                 variant="dark"
-                @click="cancelFilter()"
+                @click="CLEAR_FILTER()"
                 right
             >Сбросить фильтр</b-button>
             </b-collapse>
@@ -46,7 +46,7 @@ export default {
     dropdowns: state => state.navbar.dropdownsFilter,
   }),
   methods: mapMutations('navbar', [
-    'cancelFilter',
+    'CLEAR_FILTER',
   ]),
 };
 </script>
