@@ -4,9 +4,10 @@ const cors = require('cors');
 
 const app = express();
 
-const cocktails = require('./static/assets/json/jsonCocktail.json');
+const cocktails = require('./jsonCocktail.json');
 
 app.use(cors());
+app.use(express.static('static'));
 
 app.get('/api/v1/cocktails/', (req, res) => {
   const limit = req.query.limit || cocktails.data.length;
@@ -15,5 +16,5 @@ app.get('/api/v1/cocktails/', (req, res) => {
 });
 
 app.listen(3005, () => {
-  console.log('>>> START', new Date(), cocktails);
+  console.log('>>> START', new Date());
 });

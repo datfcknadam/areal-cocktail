@@ -6,7 +6,7 @@
     <div class="volume">
       {{item.vol}}
     </div>
-    <img :src="item.src">
+    <img :src="this.serverUrl + item.src">
     <div class="alco">
       <b>Крепкость:</b> {{item.alco}}
     </div>
@@ -19,12 +19,17 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'CocktailCard',
   props: {
     item: {
       type: Object,
     },
+  },
+  computed: {
+    ...mapState('navbar', ['serverUrl']),
   },
 };
 </script>
