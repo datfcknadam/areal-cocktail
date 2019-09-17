@@ -16,6 +16,11 @@ export default {
   methods: mapMutations('navbar', [
     'SET_SEARCH',
   ]),
+  watch: {
+    input() {
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+  },
   computed: mapState('navbar', {
     infoPlaceholder: state => state.placeholder,
   }),

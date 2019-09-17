@@ -28,13 +28,8 @@ export default {
     Navbar,
     CocktailList,
   },
-  data() {
-    return {
-      currentPage: 1,
-    };
-  },
   methods: mapMutations('navbar', [
-    'UPDATE_COUNTER',
+    'UPDATE_COUNTER', 'currentPage',
   ]),
   computed: {
     ...mapGetters('navbar', [
@@ -43,24 +38,21 @@ export default {
     ...mapState('navbar', {
       counter: state => state.counter,
       rows: state => state.totalCocktail,
+      currentPage: state => state.currentPage,
     }),
   },
   mounted() {
-    this.$store.dispatch('navbar/loadCocktails', {
-      limit: this.counter, page: this.currentPage,
-    });
+    this.$store.dispatch('navbar/loadCocktails');
     this.$store.dispatch('navbar/totalCocktails');
+    this.$store.dispatch('navbar/loadFilters');
+    this.$store.dispatch('navbar/loadSort');
   },
   watch: {
     counter() {
-      this.$store.dispatch('navbar/loadCocktails', {
-        limit: this.counter, page: this.currentPage,
-      });
+      this.$store.dispatch('navbar/loadCocktails');
     },
     currentPage() {
-      this.$store.dispatch('navbar/loadCocktails', {
-        limit: this.counter, page: this.currentPage,
-      });
+      this.$store.dispatch('navbar/loadCocktails');
     },
   },
 };

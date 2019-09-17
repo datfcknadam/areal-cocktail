@@ -1,8 +1,16 @@
 export default {
-  SET_TOTAL_COCKTAILS(state, data) {
+  LOAD_SORT(state, data) {
+    state.dropdownSort = data;
+  },
+  LOAD_FILTERS(state, data) {
+    state.dropdownFilter.alco.items = data.alco;
+    state.dropdownFilter.color.items = data.color;
+    state.dropdownFilter.taste.items = data.taste;
+  },
+  LOAD_TOTAL_COCKTAILS(state, data) {
     state.totalCocktail = data;
   },
-  SET_COCKTAILS(state, data) {
+  LOAD_COCKTAILS(state, data) {
     state.cocktail = data;
   },
   SET_SEARCH(state, value) {
@@ -10,6 +18,9 @@ export default {
   },
   UPDATE_COUNTER(state) {
     state.counter += 6;
+  },
+  currentPage(state, value) {
+    state.currentPage = value;
   },
   SET_FILTER(state, { itemsKey, value }) {
     switch (itemsKey) {

@@ -12,7 +12,7 @@
                 :text="dropdown.text"
                 :itemsKey="key"
                 :key="key"
-                :item="dropdown.item"
+                :item="dropdown.items"
               />
               <b-button
                 variant="dark"
@@ -43,7 +43,7 @@ export default {
     DropdownItemSortBy,
   },
   computed: mapState({
-    dropdowns: state => state.navbar.dropdownsFilter,
+    dropdowns: state => state.navbar.dropdownFilter,
   }),
   methods: mapMutations('navbar', [
     'CLEAR_FILTER',

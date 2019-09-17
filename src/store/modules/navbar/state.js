@@ -1,7 +1,4 @@
 
-import SortItem from '../../../static/assets/json/dropdownItemSortBy.json';
-import FillterItem from '../../../static/assets/json/dropdownItem.json';
-
 export default {
   serverUrl: 'http://localhost:3005',
   filterByAlco: '',
@@ -10,22 +7,23 @@ export default {
   totalCocktail: '',
   sortKey: '',
   cocktail: {},
+  currentPage: '',
   counter: 6,
   search: null,
   placeholder: 'Текила...',
-  dropdownsFilter: {
+  dropdownFilter: {
     alco: {
       text: 'Крепкость',
-      item: FillterItem.alco,
+      items: '',
     },
     color: {
       text: 'Цвет',
-      item: FillterItem.color,
+      items: '',
     },
     taste: {
       text: 'Вкус',
-      item: FillterItem.taste,
+      items: '',
     },
   },
-  dropdownSort: SortItem.data,
+  dropdownSort: '',
 };
