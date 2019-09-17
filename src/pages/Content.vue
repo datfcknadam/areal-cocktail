@@ -1,18 +1,18 @@
 <template>
   <div>
     <Navbar/>
-    <div id="content">
-        <b-pagination
-          v-model="currentPage"
+      <b-pagination
+          v-if="rows >= counter"
           :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="my-table"
+          :per-page="counter"
+          v-model="currentPage"
         ></b-pagination>
+    <div id="content">
       <b-card v-if="!getCocktail.length"> Ничего не найдено :(</b-card>
-      <cocktail-list/>
+      <cocktail-list />
     </div>
     <div class="btn-center">
-      <a v-if="getCocktail.length >= 6"
+      <a v-if="getCocktail.length >= 6 && rows >= counter"
         @click="UPDATE_COUNTER()">Показать еще</a>
     </div>
   </div>
@@ -23,11 +23,15 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
 import Navbar from '../components/Navbar/Navbar.vue';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
 
-
 export default {
   components: {
     Navbar,
     CocktailList,
+  },
+  data() {
+    return {
+      currentPage: 1,
+    };
   },
   methods: mapMutations('navbar', [
     'UPDATE_COUNTER',
@@ -38,18 +42,25 @@ export default {
     ]),
     ...mapState('navbar', {
       counter: state => state.counter,
+      rows: state => state.totalCocktail,
     }),
   },
   mounted() {
-    this.$store.dispatch('navbar/loadCocktails', [
-      this.counter,
-    ]);
+    this.$store.dispatch('navbar/loadCocktails', {
+      limit: this.counter, page: this.currentPage,
+    });
+    this.$store.dispatch('navbar/totalCocktails');
   },
   watch: {
     counter() {
-      this.$store.dispatch('navbar/loadCocktails', [
-        this.counter,
-      ]);
+      this.$store.dispatch('navbar/loadCocktails', {
+        limit: this.counter, page: this.currentPage,
+      });
+    },
+    currentPage() {
+      this.$store.dispatch('navbar/loadCocktails', {
+        limit: this.counter, page: this.currentPage,
+      });
     },
   },
 };

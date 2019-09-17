@@ -1,4 +1,7 @@
 export default {
+  SET_TOTAL_COCKTAILS(state, data) {
+    state.totalCocktail = data;
+  },
   SET_COCKTAILS(state, data) {
     state.cocktail = data;
   },

@@ -6,6 +6,7 @@ export default {
   filterByAlco: '',
   filterByColor: '',
   filterByTaste: '',
+  totalCocktail: '',
   sortKey: '',
   cocktail: {},
   counter: 6,
