@@ -14,12 +14,18 @@ import { mapState, mapMutations } from 'vuex';
 
 
 export default {
-  computed: mapState({
-    dropdownItemSortBy: state => state.navbar.dropdownSort,
+  computed: mapState('navbar', {
+    dropdownItemSortBy: state => state.dropdownSort,
+    sortKey: state => state.sortKey,
   }),
   methods: mapMutations('navbar', [
     'SET_SORT',
   ]),
+  watch: {
+    sortKey() {
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+  },
 
 };
 </script>

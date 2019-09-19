@@ -1,15 +1,17 @@
 <template>
 <div id="#app">
-  <Content/>
+  <Navbar/>
+  <router-view></router-view>
 </div>
 </template>
 <script>
-import Content from './pages/Content.vue';
+
+import Navbar from './components/Navbar/Navbar.vue';
 
 export default {
   name: 'App',
   components: {
-    Content,
+    Navbar,
   },
 };
 </script>
@@ -17,4 +19,5 @@ export default {
 body{
   margin: 0px;
 }
+
 </style>

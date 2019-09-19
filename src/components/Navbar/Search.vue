@@ -16,14 +16,15 @@ export default {
   methods: mapMutations('navbar', [
     'SET_SEARCH',
   ]),
+  computed: mapState('navbar', {
+    infoPlaceholder: state => state.placeholder,
+    search: state => state.search,
+  }),
   watch: {
-    input() {
+    search() {
       this.$store.dispatch('navbar/loadCocktails');
     },
   },
-  computed: mapState('navbar', {
-    infoPlaceholder: state => state.placeholder,
-  }),
 
 };
 </script>

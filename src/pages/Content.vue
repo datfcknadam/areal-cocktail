@@ -1,44 +1,43 @@
 <template>
   <div>
-    <Navbar/>
       <b-pagination
-          v-if="getCocktail.length && rows >= counter"
           :total-rows="rows"
           :per-page="counter"
           v-model="currentPage"
         ></b-pagination>
     <div id="content">
-      <b-card v-if="!getCocktail.length"> Ничего не найдено :(</b-card>
+      <b-card v-if="!cocktail.length"> Ничего не найдено :(</b-card>
       <cocktail-list />
     </div>
     <div class="btn-center">
-      <a v-if="getCocktail.length >= 6 && rows >= counter"
+      <a v-if="cocktail.length >= 6 && rows >= counter"
         @click="UPDATE_COUNTER()">Показать еще</a>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
-import Navbar from '../components/Navbar/Navbar.vue';
+import { mapState, mapMutations } from 'vuex';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
 
 export default {
   components: {
-    Navbar,
     CocktailList,
   },
+  data() {
+    return {
+      currentPage: 1,
+    };
+  },
   methods: mapMutations('navbar', [
-    'UPDATE_COUNTER', 'currentPage',
+    'UPDATE_COUNTER',
   ]),
   computed: {
-    ...mapGetters('navbar', [
-      'getCocktail',
-    ]),
     ...mapState('navbar', {
       counter: state => state.counter,
       rows: state => state.totalCocktail,
-      currentPage: state => state.currentPage,
+      search: state => state.search,
+      cocktail: state => state.cocktail,
     }),
   },
   mounted() {
@@ -51,7 +50,8 @@ export default {
     counter() {
       this.$store.dispatch('navbar/loadCocktails');
     },
-    currentPage() {
+    currentPage(value) {
+      this.$store.commit('navbar/SET_CURRENT_PAGE', value);
       this.$store.dispatch('navbar/loadCocktails');
     },
   },

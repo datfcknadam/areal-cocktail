@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import CocktailCard from './CocktailCard.vue';
 
 
@@ -16,8 +16,8 @@ export default {
   components: {
     CocktailCard,
   },
-  computed: mapGetters('navbar', {
-    cocktail: 'getCocktail',
+  computed: mapState('navbar', {
+    cocktail: state => state.cocktail,
   }),
 };
 </script>

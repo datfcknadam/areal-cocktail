@@ -7,9 +7,9 @@ export default {
   totalCocktail: '',
   sortKey: '',
   cocktail: {},
-  currentPage: '',
+  currentPage: 1,
   counter: 6,
-  search: null,
+  search: '',
   placeholder: 'Текила...',
   dropdownFilter: {
     alco: {

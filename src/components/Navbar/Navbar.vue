@@ -1,6 +1,8 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand tag="h1" class="mb-4">Cocktail</b-navbar-brand>
+    <router-link to="/content">
+      <b-navbar-brand tag="h1" class="mb-4">Cocktail</b-navbar-brand>
+    </router-link>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">

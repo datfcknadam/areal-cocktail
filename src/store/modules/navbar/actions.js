@@ -6,16 +6,14 @@ export default {
       .get(`${state.serverUrl}/api/v1/total-cocktails`)
       .then((response) => {
         commit('LOAD_TOTAL_COCKTAILS', response.data.total);
-        console.log(response.data.total);
       })
       .catch(error => console.log(error.response));
   },
   loadCocktails({ state, commit }) {
     axios
-      .get(`${state.serverUrl}/api/v1/cocktails/?limit=${state.counter}&page=${state.currentPage}`)
+      .get(`${state.serverUrl}/api/v1/cocktails/?limit=${state.counter}&page=${state.currentPage}&search=${state.search}&taste=${state.filterByTaste}&alco=${state.filterByAlco}&color=${state.filterByColor}&sortKey=${state.sortKey}`)
       .then((response) => {
         commit('LOAD_COCKTAILS', response.data);
-        console.log(state.currentPage);
       })
       .catch(error => console.log(error.response));
   },
@@ -24,7 +22,6 @@ export default {
       .get(`${state.serverUrl}/api/v1/filter`)
       .then((response) => {
         commit('LOAD_FILTERS', response.data);
-        console.log(response.data);
       })
       .catch(error => console.log(error.response));
   },

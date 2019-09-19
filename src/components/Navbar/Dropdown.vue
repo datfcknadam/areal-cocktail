@@ -10,7 +10,7 @@
   </b-nav-dropdown>
 </template>
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'Dropdown',
@@ -24,6 +24,22 @@ export default {
   methods: mapMutations('navbar', [
     'SET_FILTER',
   ]),
+  computed: mapState('navbar', {
+    alco: state => state.filterByAlco,
+    taste: state => state.filterByTaste,
+    color: state => state.filterByColor,
+  }),
+  watch: {
+    color() {
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+    alco() {
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+    taste() {
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+  },
 };
 
 </script>

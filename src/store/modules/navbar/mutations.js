@@ -19,7 +19,7 @@ export default {
   UPDATE_COUNTER(state) {
     state.counter += 6;
   },
-  currentPage(state, value) {
+  SET_CURRENT_PAGE(state, value) {
     state.currentPage = value;
   },
   SET_FILTER(state, { itemsKey, value }) {
@@ -36,6 +36,7 @@ export default {
       default:
         break;
     }
+    state.placeholder = `${state.filterByAlco} ${state.filterByColor} ${state.filterByTaste}`;
   },
   CLEAR_FILTER(state) {
     state.filterByAlco = '';
