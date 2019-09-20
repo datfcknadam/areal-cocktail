@@ -1,33 +1,39 @@
 <template>
   <div class="cocktail-page">
     <div class="router-link">
-      <router-link to="/content">
+      <router-link to="/">
         Вернуться к списку коктейлей
       </router-link>
     </div>
-    <div class="name">{{$route.params.name}}</div>
+    <div class="name">{{name}}</div>
     <div class="img">
-      <img :src="$route.params.src">
+      <img :src="src">
     </div>
     <div class="params">
       <div class="alco">
-        <b>Крепость:</b> {{$route.params.volume}}
+        <b>Крепость:</b> {{volume}}
       </div>
       <div class="price">
-        <b>Стоимость:</b> {{$route.params.price}}
+        <b>Стоимость:</b> {{price}}
       </div>
       <div class="ingredient">
-        <p><b>Состав:</b> {{$route.params.ingredient}}</p>
+        <p><b>Состав:</b> {{ingredient}}</p>
       </div>
       <div class="more-info">
-        <p><b>Описание:</b> {{$route.params.moreInfo}}</p>
+        <p><b>Описание:</b> {{moreInfo}}</p>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {
 
+export default {
+  props: ['name',
+    'src',
+    'volume',
+    'price',
+    'ingredient',
+    'moreInfo'],
 };
 </script>
 <style scoped>

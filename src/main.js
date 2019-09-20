@@ -7,12 +7,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import store from './store/index';
 import Content from './pages/Content.vue';
 import CocktailPage from './pages/CocktailPage.vue';
+import PageNotFound from './pages/PageNotFound.vue';
 
 const routes = [
-  { path: '/content', component: Content },
-  { path: '/cocktail/:id', name: 'cocktail', component: CocktailPage },
+  { path: '/', component: Content },
+  {
+    path: '/cocktail/:id', name: 'cocktail', component: CocktailPage, props: true,
+  },
+  { path: '*', component: PageNotFound },
 ];
 const router = new VueRouter({
+  mode: 'history',
   routes,
 });
 

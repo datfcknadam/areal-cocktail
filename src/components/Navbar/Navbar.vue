@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <router-link to="/content">
+    <router-link to="/">
       <b-navbar-brand tag="h1" class="mb-4">Cocktail</b-navbar-brand>
     </router-link>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
