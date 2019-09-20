@@ -1,7 +1,7 @@
 import api from '../api';
 
 export default {
-  loadData({ commit }, value) {
-    api.get(`id?id=${value}`, 'SET_DATA', commit);
+  loadData({ commit }, id) {
+    api.get('id', { id }, (response) => { commit('SET_DATA', response.data); });
   },
 };
