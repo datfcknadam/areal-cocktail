@@ -24,6 +24,7 @@ export default {
   watch: {
     sortKey() {
       this.$store.dispatch('navbar/loadCocktails');
+      this.$router.push({ name: 'content' });
     },
   },
 

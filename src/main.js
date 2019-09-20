@@ -10,10 +10,8 @@ import CocktailPage from './pages/CocktailPage.vue';
 import PageNotFound from './pages/PageNotFound.vue';
 
 const routes = [
-  { path: '/', component: Content },
-  {
-    path: '/cocktail/:id', name: 'cocktail', component: CocktailPage, props: true,
-  },
+  { path: '/', component: Content, name: 'content' },
+  { path: '/cocktail/:id', name: 'cocktail', component: CocktailPage },
   { path: '*', component: PageNotFound },
 ];
 const router = new VueRouter({

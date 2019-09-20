@@ -2,16 +2,7 @@
   <div>
     <router-link
     :to="{name: 'cocktail',
-      params: {
-        id: 'id-'+item.id,
-        name: item.name,
-        volume: item.vol,
-        src: this.serverUrl + item.src,
-        price: item.price,
-        alco: item.alco,
-        price: item.price,
-        ingredient: item.ingredient,
-        moreInfo: item.moreInfo}}">
+      params: { id: item.id }}">
       <div class="name">
         <p>{{item.name}} </p>
       </div>

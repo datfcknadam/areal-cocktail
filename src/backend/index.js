@@ -47,6 +47,12 @@ app.get('/api/v1/sort', (req, res) => {
   res.json(sort.data);
 });
 
+app.get('/api/v1/id', (req, res) => {
+  const idCocktail = req.query.id;
+  res.json((cocktails.data || [])
+    .find(value => value.id === idCocktail));
+});
+
 app.listen(3005, () => {
   console.log('>>> START', new Date());
 });

@@ -32,12 +32,15 @@ export default {
   watch: {
     color() {
       this.$store.dispatch('navbar/loadCocktails');
+      this.$router.push({ name: 'content' });
     },
     alco() {
       this.$store.dispatch('navbar/loadCocktails');
+      this.$router.push({ name: 'content' });
     },
     taste() {
       this.$store.dispatch('navbar/loadCocktails');
+      this.$router.push({ name: 'content' });
     },
   },
 };

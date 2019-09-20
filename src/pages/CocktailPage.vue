@@ -1,51 +1,66 @@
 <template>
-  <div class="cocktail-page">
+  <div>
     <div class="router-link">
-      <router-link to="/">
-        Вернуться к списку коктейлей
-      </router-link>
+        <router-link to="/">
+          Вернуться к списку коктейлей
+        </router-link>
     </div>
-    <div class="name">{{name}}</div>
-    <div class="img">
-      <img :src="src">
-    </div>
-    <div class="params">
-      <div class="alco">
-        <b>Крепость:</b> {{volume}}
+    <div class="cocktail-page">
+      <div class="name">{{name}}</div>
+      <div class="img">
+        <img :src="this.serverUrl + src">
       </div>
-      <div class="price">
-        <b>Стоимость:</b> {{price}}
-      </div>
-      <div class="ingredient">
-        <p><b>Состав:</b> {{ingredient}}</p>
-      </div>
-      <div class="more-info">
-        <p><b>Описание:</b> {{moreInfo}}</p>
+      <div class="params">
+        <div class="alco">
+          <b>Крепость:</b> {{volume}}
+        </div>
+        <div class="price">
+          <b>Стоимость:</b> {{price}}
+        </div>
+        <div class="ingredient">
+          <p><b>Состав:</b> {{ingredient}}</p>
+        </div>
+        <div class="more-info">
+          <p><b>Описание:</b> {{moreInfo}}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 
 export default {
-  props: ['name',
-    'src',
-    'volume',
-    'price',
-    'ingredient',
-    'moreInfo'],
+  computed: mapState('cocktailPage', {
+    name: state => state.name,
+    src: state => state.src,
+    volume: state => state.volume,
+    price: state => state.price,
+    ingredient: state => state.ingredient,
+    moreInfo: state => state.moreInfo,
+    serverUrl: state => state.serverUrl,
+  }),
+  created() {
+    this.$store.dispatch('cocktailPage/loadData', this.$route.params.id);
+  },
 };
+
 </script>
 <style scoped>
 .router-link{
   font-size: calc(1vw + 1vh);
   color: #007bff;
+  padding-left: 5vw;
+  padding-top: 1vh;
 }
 .cocktail-page{
     display: grid;
     grid-template-rows: 1fr;
     font-family: 'Trebuchet MS';
     word-wrap: break-word;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    font-size: calc(1vw + 1vh);
 }
 .cocktail-page > div{
     padding: calc(1vh + 2vw);

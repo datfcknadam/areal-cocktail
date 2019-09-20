@@ -23,6 +23,7 @@ export default {
   watch: {
     search() {
       this.$store.dispatch('navbar/loadCocktails');
+      this.$router.push({ name: 'content' });
     },
   },
 
