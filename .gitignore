@@ -61,8 +61,3 @@ typings/
 # next.js build output
 .next
 .vscode
-src/store/index.js
-src/store/modules/cocktailPage/state.js
-src/store/modules/cocktailPage/mutations.js
-src/store/modules/cocktailPage/index.js
-src/store/modules/cocktailPage/actions.js
