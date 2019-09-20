@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link
+    <router-link :title="`Нажмите, чтобы перейти на странцу ${item.name}`"
     :to="{name: 'cocktail',
       params: { id: item.id }}">
       <div class="name">

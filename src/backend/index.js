@@ -21,10 +21,6 @@ app.get('/api/v1/cocktails/', (req, res) => {
     const firstValue = d1[sortKey];
     const secondValue = d2[sortKey];
 
-    if (firstValue === secondValue) {
-      return 0;
-    }
-
     return firstValue > secondValue ? 1 : -1;
   })
     .filter(value => value.taste.indexOf(filterByTaste) !== -1)
