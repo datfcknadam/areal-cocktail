@@ -2,9 +2,9 @@
   <div>
     <b-dropdown-item
       v-for="value in dropdownItemSortBy"
+      href="#"
       v-text="value.name"
       :key="'sort-' + value.id"
-      href="#"
       @click="SET_SORT(value.value)"
     />
   </div>

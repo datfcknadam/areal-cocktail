@@ -32,7 +32,7 @@ app.get('/api/v1/cocktails/', (req, res) => {
 });
 
 app.get('/api/v1/total-cocktails', (req, res) => {
-  res.json({ total: cocktails.data.length });
+  res.json(cocktails.data.length);
 });
 
 app.get('/api/v1/filter', (req, res) => {

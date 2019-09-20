@@ -18,8 +18,8 @@
               />
               <b-button
                 variant="dark"
-                @click="CLEAR_FILTER()"
                 right
+                @click="CLEAR_FILTER()"
             >Сбросить фильтр</b-button>
             </b-collapse>
             <b-nav-item-dropdown variant="dark" class="m-2" text="Сортировать" right>

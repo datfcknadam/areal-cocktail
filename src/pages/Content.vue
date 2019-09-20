@@ -1,7 +1,7 @@
 <template>
   <div>
       <b-pagination
-          :total-rows="rows"
+          :total-rows="totalCocktail"
           :per-page="counter"
           v-model="currentPage"
         ></b-pagination>
@@ -10,7 +10,7 @@
       <cocktail-list />
     </div>
     <div class="btn-center">
-      <a v-if="cocktail.length >= 6 && rows >= counter"
+      <a v-if="cocktail.length >= 6 && totalCocktail >= counter"
         @click="UPDATE_COUNTER()">Показать еще</a>
     </div>
   </div>
@@ -33,14 +33,13 @@ export default {
     'UPDATE_COUNTER',
   ]),
   computed: {
-    ...mapState('navbar', {
-      counter: state => state.counter,
-      rows: state => state.totalCocktail,
-      search: state => state.search,
-      cocktail: state => state.cocktail,
-    }),
+    ...mapState('navbar',
+      ['counter',
+        'totalCocktail',
+        'search',
+        'cocktail']),
   },
-  mounted() {
+  created() {
     this.$store.dispatch('navbar/loadCocktails');
     this.$store.dispatch('navbar/totalCocktails');
     this.$store.dispatch('navbar/loadFilters');

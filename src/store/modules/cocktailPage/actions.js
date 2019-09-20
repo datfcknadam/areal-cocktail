@@ -1,11 +1,7 @@
-import axios from 'axios';
+import api from '../api';
 
 export default {
-  loadData({ state, commit }, value) {
-    axios
-      .get(`${state.serverUrl}/api/v1/id?id=${value}`)
-      .then((response) => {
-        commit('SET_DATA', response.data);
-      }).catch(error => console.log(error.response));
+  loadData({ commit }, value) {
+    api.get(`id?id=${value}`, 'SET_DATA', commit);
   },
 };

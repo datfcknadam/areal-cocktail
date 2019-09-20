@@ -1,8 +1,9 @@
 <template>
   <div class="cocktail-list">
-    <cocktail-card v-for="a in cocktail"
-      :key="a.id"
+    <cocktail-card
+      v-for="a in cocktail"
       class="cocktail"
+      :key="a.id"
       :item="a"/>
     </div>
 </template>

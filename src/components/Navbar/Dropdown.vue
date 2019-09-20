@@ -2,9 +2,9 @@
   <b-nav-dropdown lazy="true" :text="text" class="m-md-2">
     <b-dropdown-item
       v-for="value in item"
+      href="#"
       v-text="value.name"
       :key="itemsKey+ '-' + value.id"
-      href="#"
       @click="SET_FILTER({ itemsKey, value })"
     />
   </b-nav-dropdown>

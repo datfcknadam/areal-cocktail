@@ -1,10 +1,11 @@
 <template>
   <div>
-    <router-link :title="`Нажмите, чтобы перейти на странцу ${item.name}`"
-    :to="{name: 'cocktail',
-      params: { id: item.id }}">
+    <router-link
+      :title="`Нажмите, чтобы перейти на странцу ${item.name}`"
+      :to="{name: 'cocktail', params: { id: item.id }}"
+    >
       <div class="name">
-        <p>{{item.name}} </p>
+        <p>{{item.name}}</p>
       </div>
       <div class="volume">
         {{item.vol}}

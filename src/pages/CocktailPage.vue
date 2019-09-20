@@ -31,15 +31,14 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('cocktailPage', {
-    name: state => state.name,
-    src: state => state.src,
-    volume: state => state.volume,
-    price: state => state.price,
-    ingredient: state => state.ingredient,
-    moreInfo: state => state.moreInfo,
-    serverUrl: state => state.serverUrl,
-  }),
+  computed: mapState('cocktailPage',
+    ['name',
+      'src',
+      'volume',
+      'price',
+      'ingredient',
+      'moreInfo',
+      'serverUrl']),
   created() {
     this.$store.dispatch('cocktailPage/loadData', this.$route.params.id);
   },
@@ -60,7 +59,7 @@ export default {
     word-wrap: break-word;
     padding-left: 15vw;
     padding-right: 15vw;
-    font-size: calc(1vw + 1vh);
+    font-size: calc(0.5vw + 0.5vh);
 }
 .cocktail-page > div{
     padding: calc(1vh + 2vw);
