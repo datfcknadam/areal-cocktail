@@ -23,8 +23,10 @@ export default {
   ]),
   watch: {
     sortKey() {
+      if (this.$route.params.id) {
+        this.$router.push({ name: 'content' });
+      }
       this.$store.dispatch('navbar/loadCocktails');
-      this.$router.push({ name: 'content' });
     },
   },
 

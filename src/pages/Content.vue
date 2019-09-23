@@ -1,5 +1,6 @@
 <template>
   <div>
+    <go-top></go-top>
       <b-pagination
           :total-rows="totalCocktail"
           :per-page="counter"
@@ -18,20 +19,24 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+import GoTop from '@inotom/vue-go-top';
 import CocktailList from '../components/CocktailList/CocktailList.vue';
 
 export default {
   components: {
     CocktailList,
+    GoTop,
   },
   data() {
     return {
       currentPage: 1,
     };
   },
-  methods: mapMutations('navbar', [
-    'UPDATE_COUNTER',
-  ]),
+  methods: {
+    ...mapMutations('navbar', [
+      'UPDATE_COUNTER',
+    ]),
+  },
   computed: {
     ...mapState('navbar',
       ['counter',
