@@ -5,12 +5,12 @@
       href="#"
       v-text="value.name"
       :key="itemsKey+ '-' + value.id"
-      @click="SET_FILTER({ itemsKey, value })"
+      @click="SET_FILTER({ itemsKey, value }), change()"
     />
   </b-nav-dropdown>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Dropdown',
@@ -21,26 +21,15 @@ export default {
     },
     itemsKey: String,
   },
-  methods: mapMutations('navbar', [
-    'SET_FILTER',
-  ]),
-  computed: mapState('navbar', {
-    alco: state => state.filterByAlco,
-    taste: state => state.filterByTaste,
-    color: state => state.filterByColor,
-  }),
-  watch: {
-    color() {
+  methods: {
+    ...mapMutations('navbar', [
+      'SET_FILTER',
+    ]),
+    change() {
+      if (this.$route.params.id) {
+        this.$router.push({ name: 'content' });
+      }
       this.$store.dispatch('navbar/loadCocktails');
-      this.$router.push({ name: 'content' });
-    },
-    alco() {
-      this.$store.dispatch('navbar/loadCocktails');
-      this.$router.push({ name: 'content' });
-    },
-    taste() {
-      this.$store.dispatch('navbar/loadCocktails');
-      this.$router.push({ name: 'content' });
     },
   },
 };

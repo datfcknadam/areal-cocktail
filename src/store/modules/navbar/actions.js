@@ -14,7 +14,6 @@ export default {
       color: state.filterByColor,
       sortKey: state.sortKey,
     };
-
     api.get('cocktails', { params }, (response) => { commit('LOAD_COCKTAILS', response.data); });
   },
   loadFilters({ commit }) {

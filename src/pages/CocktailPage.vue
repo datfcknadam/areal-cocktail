@@ -39,7 +39,7 @@ export default {
       'ingredient',
       'moreInfo',
       'serverUrl']),
-  created() {
+  mounted() {
     this.$store.dispatch('cocktailPage/loadData', this.$route.params.id);
   },
 };

@@ -39,7 +39,7 @@ export default {
         'search',
         'cocktail']),
   },
-  created() {
+  mounted() {
     this.$store.dispatch('navbar/loadCocktails');
     this.$store.dispatch('navbar/totalCocktails');
     this.$store.dispatch('navbar/loadFilters');

@@ -4,7 +4,7 @@ export default {
   filterByAlco: '',
   filterByColor: '',
   filterByTaste: '',
-  totalCocktail: '',
+  totalCocktail: 0,
   sortKey: '',
   cocktail: {},
   currentPage: 1,

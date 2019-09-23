@@ -19,7 +19,7 @@
               <b-button
                 variant="dark"
                 right
-                @click="CLEAR_FILTER()"
+                @click="CLEAR_FILTER(), change()"
             >Сбросить фильтр</b-button>
             </b-collapse>
             <b-nav-item-dropdown variant="dark" class="m-2" text="Сортировать" right>
@@ -47,8 +47,16 @@ export default {
   computed: mapState({
     dropdowns: state => state.navbar.dropdownFilter,
   }),
-  methods: mapMutations('navbar', [
-    'CLEAR_FILTER',
-  ]),
+  methods: {
+    ...mapMutations('navbar', [
+      'CLEAR_FILTER',
+    ]),
+    change() {
+      if (this.$route.params.id) {
+        this.$router.push({ name: 'content' });
+      }
+      this.$store.dispatch('navbar/loadCocktails');
+    },
+  },
 };
 </script>
