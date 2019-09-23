@@ -10,7 +10,7 @@ export default {
   currentPage: 1,
   counter: 6,
   search: '',
-  placeholder: 'Текила...',
+  infoPlaceholder: 'Текила...',
   dropdownFilter: {
     alco: {
       text: 'Крепкость',

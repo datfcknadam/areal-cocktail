@@ -27,6 +27,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapState } from 'vuex';
 
@@ -43,41 +44,41 @@ export default {
     this.$store.dispatch('cocktailPage/loadData', this.$route.params.id);
   },
 };
-
 </script>
+
 <style scoped>
-.router-link{
+.router-link {
   font-size: calc(1vw + 1vh);
   color: #007bff;
   padding-left: 5vw;
   padding-top: 1vh;
 }
-.cocktail-page{
-    display: grid;
-    grid-template-rows: 1fr;
-    font-family: 'Trebuchet MS';
-    word-wrap: break-word;
-    padding-left: 15vw;
-    padding-right: 15vw;
-    font-size: calc(0.5vw + 0.5vh);
+.cocktail-page {
+  display: grid;
+  grid-template-rows: 1fr;
+  font-family: 'Trebuchet MS';
+  word-wrap: break-word;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  font-size: calc(0.5vw + 0.5vh);
 }
-.cocktail-page > div{
+.cocktail-page > div {
     padding: calc(1vh + 2vw);
 }
-.name{
+.name {
   font-size: calc(2vw + 2vh);
   font-weight: 600;
   text-align: center;
 }
-.img{
-    text-align: center;
+.img {
+  text-align: center;
 }
-img{
+img {
   height: calc(35vh + 10vw);
   padding-bottom: 10px;
   padding-top: 10px;
 }
-.params{
+.params {
   font-size: calc(1vw + 1vh);
 }
 .price::after {

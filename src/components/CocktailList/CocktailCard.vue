@@ -57,10 +57,10 @@ img {
   padding-bottom: 10px;
   padding-top: 10px;
 }
-a{
+a {
   color: #000000;
 }
-a:hover{
+a:hover {
   text-decoration: none;
   color: #007bff;
 }

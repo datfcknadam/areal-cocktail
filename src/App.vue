@@ -1,11 +1,11 @@
 <template>
-<div id="#app">
-  <Navbar/>
-  <router-view></router-view>
-</div>
+  <div id="#app">
+    <Navbar/>
+    <router-view></router-view>
+  </div>
 </template>
-<script>
 
+<script>
 import Navbar from './components/Navbar/Navbar.vue';
 
 export default {
@@ -15,9 +15,9 @@ export default {
   },
 };
 </script>
+
 <style>
-body{
+body {
   margin: 0px;
 }
-
 </style>

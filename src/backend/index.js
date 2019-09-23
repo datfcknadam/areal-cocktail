@@ -45,6 +45,7 @@ app.get('/api/v1/sort', (req, res) => {
 
 app.get('/api/v1/id', (req, res) => {
   const idCocktail = req.query.id;
+
   res.json((cocktails.data || [])
     .find(value => String(value.id) === idCocktail));
 });

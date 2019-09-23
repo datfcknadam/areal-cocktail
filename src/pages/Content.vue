@@ -2,17 +2,18 @@
   <div>
     <go-top></go-top>
       <b-pagination
-          :total-rows="totalCocktail"
-          :per-page="counter"
-          v-model="currentPage"
-        ></b-pagination>
+        :total-rows="totalCocktail"
+        :per-page="counter"
+        v-model="currentPage"
+      />
     <div id="content">
       <b-card v-if="!cocktail.length"> Ничего не найдено :(</b-card>
       <cocktail-list />
     </div>
     <div class="btn-center">
       <a v-if="cocktail.length >= 6 && totalCocktail >= counter"
-        @click="UPDATE_COUNTER()">Показать еще</a>
+        @click="UPDATE_COUNTER()"
+      >Показать еще</a>
     </div>
   </div>
 </template>
@@ -38,11 +39,12 @@ export default {
     ]),
   },
   computed: {
-    ...mapState('navbar',
-      ['counter',
-        'totalCocktail',
-        'search',
-        'cocktail']),
+    ...mapState('navbar', [
+      'counter',
+      'totalCocktail',
+      'search',
+      'cocktail',
+    ]),
   },
   mounted() {
     this.$store.dispatch('navbar/loadCocktails');
@@ -63,30 +65,30 @@ export default {
 </script>
 
 <style>
-  #content {
-    padding-left: 15vw;
-    padding-right: 15vw;
-    font-size: calc(0.5vw + 1vh);
-  }
-  .btn-center > a{
-    width: 20vw;
-    height: 5vh;
-    background: #f4ddb2;
-    font-size: 3vh;
-    border-radius: 60px;
-    padding: .8em 1em calc(.8em + 3px);
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    transition: 0.2s;
-    cursor: pointer;
-  }
-  .btn-center > a:hover{
-    background: linear-gradient(114deg,#b9b9b9,#f4ddb2 );
-  }
-  .btn-center{
-    text-align: center;
-    margin-top: 6vh;
-    margin-bottom: 8vh;
-  }
+#content {
+  padding-left: 15vw;
+  padding-right: 15vw;
+  font-size: calc(0.5vw + 1vh);
+}
+.btn-center > a {
+  width: 20vw;
+  height: 5vh;
+  background: #f4ddb2;
+  font-size: 3vh;
+  border-radius: 60px;
+  padding: .8em 1em calc(.8em + 3px);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.btn-center > a:hover {
+  background: linear-gradient(114deg,#b9b9b9,#f4ddb2 );
+}
+.btn-center {
+  text-align: center;
+  margin-top: 6vh;
+  margin-bottom: 8vh;
+}
 </style>
