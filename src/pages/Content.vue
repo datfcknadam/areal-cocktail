@@ -11,7 +11,7 @@
       <cocktail-list />
     </div>
     <div class="btn-center">
-      <a v-if="cocktail.length >= 6 && totalCocktail >= counter"
+      <a v-if="cocktail.length >= 6 && totalCocktail > counter"
         @click="UPDATE_COUNTER()"
       >Показать еще</a>
     </div>

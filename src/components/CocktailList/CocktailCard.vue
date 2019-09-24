@@ -10,7 +10,7 @@
       <div class="volume">
         {{item.vol}}
       </div>
-      <img :src="this.serverUrl + item.src">
+      <img :src="this.serverUrl + item.image">
       <div class="alco">
         <b>Крепкость:</b> {{item.alco}}
       </div>

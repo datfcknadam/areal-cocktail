@@ -2,7 +2,7 @@ export default {
   name: '',
   volume: '',
   price: '',
-  src: '',
+  image: '',
   ingredient: '',
   moreInfo: '',
   serverUrl: 'http://localhost:3005',

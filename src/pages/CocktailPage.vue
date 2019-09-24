@@ -1,14 +1,17 @@
 <template>
   <div>
     <div class="router-link">
-        <router-link to="/">
-          Вернуться к списку коктейлей
-        </router-link>
+      <router-link to="/">
+        Вернуться к списку коктейлей
+      </router-link>
     </div>
-    <div class="cocktail-page">
+    <div v-if="!name" class="error">
+      Такой страницы с коктейлем нет =(
+    </div>
+    <div v-if="name" class="cocktail-page">
       <div class="name">{{name}}</div>
       <div class="img">
-        <img :src="this.serverUrl + src">
+        <img :src="serverUrl + image">
       </div>
       <div class="params">
         <div class="alco">
@@ -32,21 +35,33 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('cocktailPage',
-    ['name',
-      'src',
-      'volume',
-      'price',
-      'ingredient',
-      'moreInfo',
-      'serverUrl']),
-  mounted() {
+  computed: mapState('cocktailPage', [
+    'name',
+    'image',
+    'volume',
+    'price',
+    'ingredient',
+    'moreInfo',
+    'serverUrl',
+  ]),
+  created() {
     this.$store.dispatch('cocktailPage/loadData', this.$route.params.id);
   },
 };
 </script>
 
 <style scoped>
+.error {
+  display: grid;
+  grid-template-rows: 1fr;
+  font-family: 'Trebuchet MS';
+  word-wrap: break-word;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  padding-top: 25vh;
+  font-size: calc(2vw + 2vh);
+  text-align: center;
+}
 .router-link {
   font-size: calc(1vw + 1vh);
   color: #007bff;
@@ -74,6 +89,7 @@ export default {
   text-align: center;
 }
 img {
+  font-size: calc(3vh + 1vw);
   height: calc(35vh + 10vw);
   padding-bottom: 10px;
   padding-top: 10px;

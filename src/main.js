@@ -13,7 +13,7 @@ import PageNotFound from './pages/PageNotFound.vue';
 const routes = [
   { path: '/', component: Content, name: 'content' },
   { path: '/cocktail/:id', name: 'cocktail', component: CocktailPage },
-  { path: '*', component: PageNotFound },
+  { path: '*', component: PageNotFound, name: 'notFound' },
 ];
 const router = new VueRouter({
   mode: 'history',

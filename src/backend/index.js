@@ -16,11 +16,15 @@ app.get('/api/v1/cocktails/', (req, res) => {
   const filterByColor = req.query.color || '';
   const filterByTaste = req.query.taste || '';
   const sortKey = req.query.sortKey || 'id';
+  const name = 'id';
 
   res.json((cocktails.data || []).sort((d1, d2) => {
     const firstValue = d1[sortKey];
     const secondValue = d2[sortKey];
 
+    if (firstValue === secondValue) {
+      return d1[name] > d2[name] ? 1 : -1;
+    }
     return firstValue > secondValue ? 1 : -1;
   })
     .filter(value => value.taste.indexOf(filterByTaste) !== -1)
